@@ -18,9 +18,9 @@
 unsigned long numBitsPerSerialByte = 10;
 unsigned long baudrate = 9600;
 unsigned long bitDurationMicros = 1E6 / baudrate;
-unsigned long byteDurationMicros = numBitsPerSerialByte * bitDuration;
+unsigned long byteDurationMicros = numBitsPerSerialByte * bitDurationMicros;
 
-boolean isAllowedToSpeak  = true;
+bool isAllowedToSpeak  = true;
 
 // COMMAND ID'S
 const byte cmd_ping                     = B00000001; // blink LED and respond
@@ -33,6 +33,7 @@ const byte cmd_deauthorizeCommunication = B00000111; // disable device to speak 
 
 const byte msgInvalid       = B01010101;
 const byte startByte        = B10101010;
+const byte msgUnknownCmd    = B00000001;
 
 const int pinEnable = 2;
 
@@ -66,7 +67,8 @@ void loop(){
         }
         //REPORT INCORRECT MESSAGE IN CASE OF ERROR
         else{
-          sendMessage(msgInvalid, (byte*)sizeof(msgInvalid), 1); //CHECK WHEN NOT SLEEPY    }
+          sendMessage(msgInvalid, (byte*)sizeof(msgInvalid), 1); //CHECK WHEN NOT SLEEPY    
+        }
       }
       //IGNORE MESSAGE AND PERFORM OTHER TASKS
       else{
@@ -96,10 +98,10 @@ void interpretMessage(byte *msg, int msgLength){
       setup();
       break;
     case cmd_deauthorizeCommunication: // If device is screwing things up, one may force it into listen only mode
-      isAuthorizedToSpeak = false;
+      isAllowedToSpeak = false;
       break;
     case cmd_authorizeCommunication: // Re-authorize device to communicate
-      isAuthorizedToSpeak = true;
+      isAllowedToSpeak = true;
       break;  
     case cmd_identify: // Make device send its description
       identify();
@@ -122,7 +124,7 @@ void interpretMessage(byte *msg, int msgLength){
   }
 }
 
-byte calcChecksum(byte *byteArray, int arrayLength){
+byte calcChecksum(byte *byteArray, int msgLength){
   byte msgSum = 0;
   for (int i = 0; i < msgLength; ++i)
   {
@@ -145,14 +147,15 @@ void sendMessage(byte msgType, byte *msg, int nBytes){
   releaseComLine();
 }
 
+void releaseComLine() {
+
+  digitalWrite(pinEnable, LOW);
+}
+
 void grabComLine(){
   if(isAllowedToSpeak){
     digitalWrite(pinEnable, HIGH);
   }
-}
-
-void releaseComLine(){
-  digitalWrite(pinEnable, LOW);
 }
 
 bool readMessage(byte *msg, int msgLength){
