@@ -1,7 +1,7 @@
 // THIS FILE SHOULD NOT BE MODIFIED ONCE PROVEN CORRECT. ALL DEVICE SPECIFIC PROGRAMMING 
 // MUST BE SPECIFIED WITHIN THE DEVICE SPECIFIC FILE, INCORPORATED BY THE INCLUDE 
 // COMMAND BELOW.
-#include deviceSpecificCode.h
+#include "deviceSpecificCode.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // PROTOCOL:
@@ -118,7 +118,7 @@ void interpretMessage(byte *msg, int msgLength){
         break;
       }
       else{
-        sendMessage(msgUnknownCmd, byte noMsg, 0);
+        sendMessage(msgUnknownCmd, 0, 0);
         break;
       }
   }
@@ -128,7 +128,7 @@ byte calcChecksum(byte *byteArray, int msgLength){
   byte msgSum = 0;
   for (int i = 0; i < msgLength; ++i)
   {
-    msgSum += msg[i];
+    msgSum += byteArray[i];
   }
   return msgSum;
 }

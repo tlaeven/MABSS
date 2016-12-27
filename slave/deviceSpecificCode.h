@@ -1,6 +1,9 @@
+#include "Arduino.h"
 const byte myID = B001;
 
 void doBackground(){
+}
+void identify(){
 }
 
 bool interpretDeviceSpecificMessage(byte *msg, int msgLength){
