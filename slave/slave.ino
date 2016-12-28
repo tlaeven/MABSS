@@ -166,7 +166,6 @@ bool readMessage(byte *msg, int msgLength, byte checkSum){
 void waitForMessage(int msgLength){
   unsigned long startTime = micros();
   unsigned long msgTimeout = byteDurationMicros * msgLength;
-  while(micros() - startTime < msgTimeout){
   while((micros() - startTime) < msgTimeout){
     doBackground();
     if (Serial.available() >= msgLength){
