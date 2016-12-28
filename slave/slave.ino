@@ -17,7 +17,7 @@
 // NETWORK SPECS
 unsigned long numBitsPerSerialByte = 10;
 unsigned long baudrate = 9600;
-unsigned long bitDurationMicros = 1E6 / baudrate;
+unsigned long bitDurationMicros = (long) (1E6 / (float)baudrate) + 1;
 unsigned long byteDurationMicros = numBitsPerSerialByte * bitDurationMicros;
 
 bool isAllowedToSpeak  = true;
@@ -40,7 +40,9 @@ const int pinEnable = 2;
 void setup(){
   loadEEPROM();
 
-  Serial.begin(baudrate, SERIAL_8E1);
+  Serial.begin(baudrate);
+  Serial.println(byteDurationMicros);
+  pinMode(8, OUTPUT);
   pinMode(pinEnable,   OUTPUT);
   pinMode(A0,  INPUT);
   pinMode(LED_BUILTIN,OUTPUT);
@@ -51,16 +53,17 @@ void setup(){
 
 void loop(){
   ///////////////////////////////////
-  //CHECK IF NEW MESSAGE IS AVAILABLE
-  if (Serial.available() > 2) {
     //CHECK IF IT IS A VALID MESSAGE
     if (Serial.read() == startByte){
+      waitForMessage(2); // Wait for length and id
       int msgLength = (int)Serial.read();
+      
       //LISTEN TO MESSAGE
       if (Serial.read() == myID){
-        waitForMessage(msgLength);
+        byte checkSum = Serial.read();
+        waitForMessage(msgLength); // wait for message plus checksum
         byte msg[msgLength];
-        bool isValidMessage = readMessage(msg, msgLength);
+        bool isValidMessage = readMessage(msg, msgLength, checkSum);
         //INTERPRET IF CHECKSUM IS CORRECT
         if (isValidMessage){
           interpretMessage(msg, msgLength);
@@ -75,13 +78,7 @@ void loop(){
         waitForMessage(msgLength);
         purgeBuffer();
       }
-    }
-
-    //NOT A VALID MESSAGE: EMPTY BUFFER
-    else{
-      purgeBuffer();
-    }
-  }
+    }  
 
   /////////////////////////////////////////
   // IF BUS IS EMPTY, PERFORM REGULAR TASKS
@@ -107,7 +104,7 @@ void interpretMessage(byte *msg, int msgLength){
       identify();
       break;
     case cmd_ping: // Blink LED and confirm reception with message
-      // ping();
+      ping();
       break;
     case cmd_flash_eeprom: // Flash eeprom to update device
       // flash_eeprom(byte *msg, int msgLength);
@@ -125,7 +122,7 @@ void interpretMessage(byte *msg, int msgLength){
 }
 
 byte calcChecksum(byte *byteArray, int msgLength){
-  byte msgSum = 0;
+  byte msgSum = myID;
   for (int i = 0; i < msgLength; ++i)
   {
     msgSum += byteArray[i];
@@ -141,7 +138,8 @@ void sendMessage(byte msgType, byte *msg, int nBytes){
 
   Serial.write(startByte);
   Serial.write(myID);
-  Serial.write(msg, nBytes);
+  Serial.write(msgSum);
+  Serial.write(msg, nBytes); 
   Serial.flush(); // Wait till message is sent, before releasing line
  
   releaseComLine();
@@ -158,8 +156,7 @@ void grabComLine(){
   }
 }
 
-bool readMessage(byte *msg, int msgLength){
-  byte checkSum = Serial.read();
+bool readMessage(byte *msg, int msgLength, byte checkSum){
   Serial.readBytes((char*)msg, msgLength);
   
   byte msgSum = calcChecksum(msg, msgLength);
@@ -170,6 +167,7 @@ void waitForMessage(int msgLength){
   unsigned long startTime = micros();
   unsigned long msgTimeout = byteDurationMicros * msgLength;
   while(micros() - startTime < msgTimeout){
+  while((micros() - startTime) < msgTimeout){
     doBackground();
     if (Serial.available() >= msgLength){
       break;
@@ -184,3 +182,10 @@ void purgeBuffer(){
 }
 
 void loadEEPROM(){}
+
+void ping(){
+  sendMessage(cmd_ping, (byte*)myID, 1);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+}
