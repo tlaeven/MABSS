@@ -3,167 +3,142 @@
 // COMMAND BELOW.
 #include "deviceSpecificCode.h"
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// PROTOCOL:
-// BYTE #   | DESCRIPTION
-// ------------------------
-//   1.     | START BYTE
-//   2.     | MESSAGE LENGTH
-//   3.     | ADDRESSED ID
-//   4.     | CHECKSUM
-//   5-63   | MESSAGE   
+////////////////////////////////////////////////
+// PROTOCOL:                                  //
+// byte #   | description                     //
+// ------------------------                   //
+//   1.     | START BYTE                      //
+//   2.     | CHECKSUM                =       //
+//   3.     | SLAVE ID                +       //
+//   4.     | MESSAGE LENGTH          +       //
+//   5-63   | MESSAGE                 +       //
+//                                            //
+////////////////////////////////////////////////
 
 
-// NETWORK SPECS
-unsigned long numBitsPerSerialByte = 10;
+
+///////////////////
+// NETWORK SPECS //
+///////////////////
+
+unsigned long numBitsPerSerialByte = 8;
 unsigned long baudrate = 9600;
-unsigned long bitDurationMicros = (long) (1E6 / (float)baudrate) + 1;
+unsigned long bitDurationMicros = (long) (1E6 / (float)baudrate) + 1; // Plus one for roundoff error
 unsigned long byteDurationMicros = numBitsPerSerialByte * bitDurationMicros;
 
-bool isAllowedToSpeak  = true;
 
-// COMMAND ID'S
+//////////////////////////////////
+// STANDARD COMMANDS & MESSAGES //
+//////////////////////////////////
+
+const byte startByte                    = B10101010; // indicates start of communication
+                                      
 const byte cmd_ping                     = B00000001; // blink LED and respond
-const byte cmd_read                     = B00000010; // respond with measurement
 const byte cmd_identify                 = B00000011; // respond with description of device
-const byte cmd_reset                    = B00000100; // reset device
-const byte cmd_flash_eeprom             = B00000101; // flash eeprom and reset device
 const byte cmd_authorizeCommunication   = B00000110; // enable device to speak on line
 const byte cmd_deauthorizeCommunication = B00000111; // disable device to speak on line
 
-const byte msgInvalid       = B01010101;
-const byte startByte        = B10101010;
-const byte msgUnknownCmd    = B00000001;
+const byte msgInvalid                   = B01010101; // indicates checksum does not match
+const byte msgUnknownCmd                = B00000001; // indicates command is unknown to device
 
-const int pinEnable = 2;
+
+//////////////////////
+// GLOBAL VARIABLES //
+//////////////////////
+
+bool isAllowedToSpeak  = true; // Controls whether device is allow to grab hold of com line
+
+
+/////////////////////////
+// SETUP AND MAIN LOOP //
+/////////////////////////
 
 void setup(){
   loadEEPROM();
-
   Serial.begin(baudrate);
-  Serial.println(byteDurationMicros);
-  pinMode(8, OUTPUT);
-  pinMode(pinEnable,   OUTPUT);
-  pinMode(A0,  INPUT);
-  pinMode(LED_BUILTIN,OUTPUT);
-  
-  digitalWrite(pinEnable, LOW);
-  Serial.flush();
+  deviceSpecificSetup();
 }
 
 void loop(){
-  ///////////////////////////////////
-    //CHECK IF IT IS A VALID MESSAGE
-    if (Serial.read() == startByte){
-      waitForMessage(2); // Wait for length and id
-      int msgLength = (int)Serial.read();
-      
-      //LISTEN TO MESSAGE
-      if (Serial.read() == myID){
-        byte checkSum = Serial.read();
-        waitForMessage(msgLength); // wait for message plus checksum
-        byte msg[msgLength];
-        bool isValidMessage = readMessage(msg, msgLength, checkSum);
-        //INTERPRET IF CHECKSUM IS CORRECT
-        if (isValidMessage){
-          interpretMessage(msg, msgLength);
-        }
-        //REPORT INCORRECT MESSAGE IN CASE OF ERROR
-        else{
-          sendMessage(msgInvalid, (byte*)sizeof(msgInvalid), 1); //CHECK WHEN NOT SLEEPY    
-        }
-      }
-      //IGNORE MESSAGE AND PERFORM OTHER TASKS
-      else{
-        waitForMessage(msgLength);
-        purgeBuffer();
-      }
-    }  
+  //:::::::::::::::::::::::::
+  // A: STARTBYTE DETECTED ::
+  //:::::::::::::::::::::::::
+    
+    // @1. START BYTE
+          if (Serial.read() == startByte){         
+      //---- WAIT ----//
+            yieldUntilNbytes(3);
+    // @2. CHECKSUM
+            byte checkSum = Serial.read();          
+    // @3. TARGET ID
+            byte targetID = Serial.read();     
+    // @4. MESSAGE LENGTH     
+            int msgLength = (int)Serial.read();
+            
+      //---- WAIT ----//
+            yieldUntilNbytes(msgLength);
 
-  /////////////////////////////////////////
-  // IF BUS IS EMPTY, PERFORM REGULAR TASKS
-  else {
-    doBackground();
-  }
+    // @5+. MESSAGE
+          // IF TARGETED DEVICE:
+              if (targetID == myID){ 
+                      byte msg[msgLength];
+                      bool isValidMessage = readMessage(msg, msgLength, checkSum);
+                  
+                      if (isValidMessage){ // checksum correct -> interpret message
+                        interpretMessage(msg, msgLength);
+                      }
+                      else{ // checksum invalid -> interpret message
+                        sendMessage(msgInvalid); 
+                      }
+              }
+            
+          // NOT TARGETED DEVICE:
+              else{
+                purgeBuffer();
+              }
+        }  
+
+  //::::::::::::::::::::::
+  // B: NO STARTBYTE    ::
+  //::::::::::::::::::::::
+          else {
+            doBackground();
+          }
 }
 
-void interpretMessage(byte *msg, int msgLength){
-  byte msgType = msg[0];
 
-  switch (msgType) {
-    case cmd_reset: // re-run setup code
-      setup();
-      break;
-    case cmd_deauthorizeCommunication: // If device is screwing things up, one may force it into listen only mode
-      isAllowedToSpeak = false;
-      break;
-    case cmd_authorizeCommunication: // Re-authorize device to communicate
-      isAllowedToSpeak = true;
-      break;  
-    case cmd_identify: // Make device send its description
-      identify();
-      break;
-    case cmd_ping: // Blink LED and confirm reception with message
-      ping();
-      break;
-    case cmd_flash_eeprom: // Flash eeprom to update device
-      // flash_eeprom(byte *msg, int msgLength);
-      break;
-    default: // Either msg is device specific or it is an unknown command.
-      bool isKnownCommand = interpretDeviceSpecificMessage(msg, msgLength);
-      if (isKnownCommand){
-        break;
-      }
-      else{
-        sendMessage(msgUnknownCmd, 0, 0);
-        break;
-      }
-  }
+//////////////////////////
+// FUNCTIONS & ROUTINES //
+//////////////////////////
+
+bool readMessage(byte *msg, int nBytes, byte checkSum){
+  Serial.readBytes((char*)msg, nBytes);
+  
+  byte msgSum = calcChecksum(msg, nBytes);
+  return (msgSum == checkSum);
 }
 
-byte calcChecksum(byte *byteArray, int msgLength){
-  byte msgSum = myID;
-  for (int i = 0; i < msgLength; ++i)
-  {
-    msgSum += byteArray[i];
-  }
-  return msgSum;
-}
-
-void sendMessage(byte msgType, byte *msg, int nBytes){
+void sendMessage(byte *msg, int nBytes){
   byte msgSum = calcChecksum(msg, nBytes);
   
   Serial.flush(); // Wait for print to serial to complete
   grabComLine();
 
-  Serial.write(startByte);
-  Serial.write(myID);
-  Serial.write(msgSum);
-  Serial.write(msg, nBytes); 
+  Serial.write(startByte);        // @1. STARTBYTE
+  Serial.write(msgSum);           // @2. CHECKSUM
+  Serial.write(myID);             // @3. SLAVE ID
+  Serial.write((byte) nBytes);    // @4. MESSAGE LENGTH
+  Serial.write(msg, nBytes);      // @5+ MESSAGE
+
   Serial.flush(); // Wait till message is sent, before releasing line
- 
   releaseComLine();
 }
 
-void releaseComLine() {
-
-  digitalWrite(pinEnable, LOW);
+void sendMessage(byte msgType){
+  sendMessage((byte*) msgType, 1); 
 }
 
-void grabComLine(){
-  if(isAllowedToSpeak){
-    digitalWrite(pinEnable, HIGH);
-  }
-}
-
-bool readMessage(byte *msg, int msgLength, byte checkSum){
-  Serial.readBytes((char*)msg, msgLength);
-  
-  byte msgSum = calcChecksum(msg, msgLength);
-  return (msgSum == checkSum);
-}
-
-void waitForMessage(int msgLength){
+void yieldUntilNbytes(int msgLength){
   unsigned long startTime = micros();
   unsigned long msgTimeout = byteDurationMicros * msgLength;
   while((micros() - startTime) < msgTimeout){
@@ -174,13 +149,60 @@ void waitForMessage(int msgLength){
   }
 }
 
+void interpretMessage(byte *msg, int msgLength){
+  byte msgType = msg[0];
+
+  switch (msgType) {
+    case cmd_deauthorizeCommunication: // If device is screwing things up, one may force it into listen only mode
+      isAllowedToSpeak = false;
+      break;
+    case cmd_authorizeCommunication: // Re-authorize device to communicate
+      isAllowedToSpeak = true;
+      break;  
+    case cmd_identify: // Make device send its description
+      sendMessage((byte *) ID_STRING, ID_STRING_NBytes);
+      break;
+    case cmd_ping: // Blink LED and confirm reception with message
+      ping();
+      break;
+    default: // Either msg is device specific or it is an unknown command.
+      bool isKnownCommand = interpretDeviceSpecificMessage(msg, msgLength);
+      if (isKnownCommand){
+        break;
+      }
+      else{
+        sendMessage(msgUnknownCmd);
+        break;
+      }
+  }
+}
+
+void releaseComLine() {
+  digitalWrite(pinEnable, LOW);
+}
+
+void grabComLine(){
+  if(isAllowedToSpeak){
+    digitalWrite(pinEnable, HIGH);
+  }
+}
+
+byte calcChecksum(byte *byteArray, int msgLength){
+  byte msgSum = myID;
+  msgSum += (byte) msgLength;
+
+  for (int i = 0; i < msgLength; ++i)
+  {
+    msgSum += byteArray[i];
+  }
+  return msgSum;
+}
+
 void purgeBuffer(){
   while (Serial.available() > 0){
     Serial.read();
   }
 }
-
-void loadEEPROM(){}
 
 void ping(){
   sendMessage(cmd_ping, (byte*)myID, 1);
