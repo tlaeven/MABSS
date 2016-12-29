@@ -54,7 +54,6 @@ bool isAllowedToSpeak  = true; // Controls whether device is allow to grab hold 
 /////////////////////////
 
 void setup(){
-  loadEEPROM();
   Serial.begin(baudrate);
   deviceSpecificSetup();
 }
@@ -205,8 +204,11 @@ void purgeBuffer(){
 }
 
 void ping(){
-  sendMessage(cmd_ping, (byte*)myID, 1);
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
+  sendMessage((byte*)myID, 1);
+    for(int i=0; i < 5; i++){
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(100);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(100);
+  }
 }
