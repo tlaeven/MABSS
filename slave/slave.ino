@@ -33,10 +33,10 @@ unsigned long byteDurationMicros = numBitsPerSerialByte * bitDurationMicros;
 
 const byte startByte                    = B10101010; // indicates start of communication
                                       
-const byte cmd_ping                     = B00000001; // blink LED and respond
-const byte cmd_identify                 = B00000011; // respond with description of device
-const byte cmd_authorizeCommunication   = B00000110; // enable device to speak on line
-const byte cmd_deauthorizeCommunication = B00000111; // disable device to speak on line
+const byte cmd_ping                     = B00000000; // blink LED and respond
+const byte cmd_identify                 = B00000001; // respond with description of device
+const byte cmd_authorizeCommunication   = B00000010; // enable device to speak on line
+const byte cmd_deauthorizeCommunication = B00000011; // disable device to speak on line
 
 const byte msgInvalid                   = B01010101; // indicates checksum does not match
 const byte msgUnknownCmd                = B00000001; // indicates command is unknown to device
