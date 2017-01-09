@@ -1,0 +1,3 @@
+Record=TopLevelDocument|FileName=master_sheet.SchDoc
+Record=SheetSymbol|SourceDocument=master_sheet.SchDoc|Designator=U_general_Interface|SchDesignator=U_general_Interface|FileName=general_Interface.SchDoc|SymbolType=Normal|RawFileName=general_Interface.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=master_sheet.SchDoc|Designator=U_sensor_specific|SchDesignator=U_sensor_specific|FileName=sensor_specific.SchDoc|SymbolType=Normal|RawFileName=sensor_specific.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
