@@ -73,23 +73,6 @@ GenerateClassCluster=0
 DocumentUniqueId=WUTBIXBJ
 
 [Document3]
-DocumentPath=Libraries\Atmel Microcontroller megaAVR.IntLib
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=
-
-[Document4]
 DocumentPath=sensor_specific.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -106,24 +89,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QNRGFQSM
 
-[Document5]
-DocumentPath=..\..\..\..\..\Downloads\Libraries\ST Microelectronics\ST Power Mgt Voltage Regulator.IntLib
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=
-
-[Document6]
+[Document4]
 DocumentPath=Libraries\MABSS.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -140,7 +106,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document7]
+[Document5]
 DocumentPath=Libraries\MABSS.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -155,24 +121,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=
-
-[Document8]
-DocumentPath=test.PcbDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=YAHOGRYR
+DocumentUniqueId=ISXSSMIQ
 
 [Configuration1]
 Name=Default Configuration
@@ -318,7 +267,7 @@ OutputDefault1=0
 [OutputGroup3]
 Name=Documentation Outputs
 Description=
-TargetPrinter=Virtual Printer
+TargetPrinter=\\https://srv663.tudelft.net\TUD600146
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=Assembler Source Print
 OutputName1=Assembler Source Prints
@@ -540,8 +489,6 @@ OutputDocumentPath1=
 OutputVariantName1=[No Variations]
 OutputDefault1=0
 PageOptions1=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-3|MediaType=1|DitherType=10|PrintScaleMode=1|PaperKind=A4|PaperIndex=9
-Configuration1_Name1=ColumnNameFormat
-Configuration1_Item1=CaptionAsName
 OutputType2=ComponentCrossReference
 OutputName2=Component Cross Reference Report
 OutputDocumentPath2=
@@ -1104,9 +1051,9 @@ SelectedOnly=0
 UpdateVariants=1
 PartTypes=0
 ComponentLibIdentifierKind0=Library Name And Type
-ComponentLibraryIdentifier0=Atmel Microcontroller megaAVR.IntLib
-ComponentDesignItemID0=ATmega328P-AU
-ComponentSymbolReference0=ATmega328P-AU
+ComponentLibraryIdentifier0=MABSS.SchLib
+ComponentDesignItemID0=ATtiny441
+ComponentSymbolReference0=ATtiny441
 ComponentUpdate0=1
 ComponentIsDeviceSheet0=0
 ComponentLibIdentifierKind1=Library Name And Type
@@ -1146,9 +1093,9 @@ ComponentSymbolReference6=SW-PB
 ComponentUpdate6=1
 ComponentIsDeviceSheet6=0
 ComponentLibIdentifierKind7=Library Name And Type
-ComponentLibraryIdentifier7=Miscellaneous Devices.IntLib
-ComponentDesignItemID7=Volt Reg
-ComponentSymbolReference7=Volt Reg
+ComponentLibraryIdentifier7=ST Power Mgt Voltage Regulator.IntLib
+ComponentDesignItemID7=L78L05ACD
+ComponentSymbolReference7=L78L05ACD
 ComponentUpdate7=1
 ComponentIsDeviceSheet7=0
 FullReplace=1
@@ -1164,106 +1111,99 @@ RemoveParameters=0
 AddModels=1
 RemoveModels=1
 UpdateCurrentModels=1
-ParameterName0=Code_JEDEC
+ParameterName0=Code_IPC
 ParameterUpdate0=1
-ParameterName1=Comment
+ParameterName1=Code_JEDEC
 ParameterUpdate1=1
-ParameterName2=Component Kind
+ParameterName2=Comment
 ParameterUpdate2=1
-ParameterName3=ComponentLink1Description
+ParameterName3=Component Kind
 ParameterUpdate3=1
-ParameterName4=ComponentLink1URL
+ParameterName4=ComponentLink1Description
 ParameterUpdate4=1
-ParameterName5=ComponentLink2Description
+ParameterName5=ComponentLink1URL
 ParameterUpdate5=1
-ParameterName6=ComponentLink2URL
+ParameterName6=DatasheetVersion
 ParameterUpdate6=1
-ParameterName7=ComponentLink3Description
+ParameterName7=Description
 ParameterUpdate7=1
-ParameterName8=ComponentLink3URL
+ParameterName8=LatestRevisionDate
 ParameterUpdate8=1
-ParameterName9=DatasheetVersion
+ParameterName9=LatestRevisionNote
 ParameterUpdate9=1
-ParameterName10=Description
+ParameterName10=Library Reference
 ParameterUpdate10=1
-ParameterName11=LatestRevisionDate
+ParameterName11=PackageDescription
 ParameterUpdate11=1
-ParameterName12=LatestRevisionNote
+ParameterName12=PackageReference
 ParameterUpdate12=1
-ParameterName13=Library Reference
+ParameterName13=PackageVersion
 ParameterUpdate13=1
-ParameterName14=PackageDescription
+ParameterName14=Published
 ParameterUpdate14=1
-ParameterName15=PackageReference
+ParameterName15=Publisher
 ParameterUpdate15=1
-ParameterName16=PackageVersion
+ParameterName16=Value
 ParameterUpdate16=1
-ParameterName17=Published
-ParameterUpdate17=1
-ParameterName18=Publisher
-ParameterUpdate18=1
-ParameterName19=Value
-ParameterUpdate19=1
-ModelTypeGroup0=PCBLIB
+ModelTypeGroup0=PCB3DLib
 ModelTypeUpdate0=1
-ModelType0=PCBLIB
-ModelName0=32A_L
+ModelType0=PCB3DLib
+ModelName0=SO8
 ModelUpdate0=1
+ModelTypeGroup1=PCBLIB
+ModelTypeUpdate1=1
 ModelType1=PCBLIB
-ModelName1=32A_M
+ModelName1=6ST1_L
 ModelUpdate1=1
 ModelType2=PCBLIB
-ModelName2=32A_N
+ModelName2=8S1_M
 ModelUpdate2=1
 ModelType3=PCBLIB
-ModelName3=8S1_M
+ModelName3=AXIAL-0.3
 ModelUpdate3=1
 ModelType4=PCBLIB
-ModelName4=AXIAL-0.3
+ModelName4=CAPR5-4X5
 ModelUpdate4=1
 ModelType5=PCBLIB
-ModelName5=CAPR5-4X5
+ModelName5=HDR1X4
 ModelUpdate5=1
 ModelType6=PCBLIB
-ModelName6=D2PAK_L
+ModelName6=LED-0
 ModelUpdate6=1
 ModelType7=PCBLIB
-ModelName7=D2PAK_M
+ModelName7=SO8_L
 ModelUpdate7=1
 ModelType8=PCBLIB
-ModelName8=D2PAK_N
+ModelName8=SO8_M
 ModelUpdate8=1
 ModelType9=PCBLIB
-ModelName9=HDR1X4
+ModelName9=SO8_N
 ModelUpdate9=1
 ModelType10=PCBLIB
-ModelName10=LED-0
+ModelName10=SPST-2
 ModelUpdate10=1
-ModelType11=PCBLIB
-ModelName11=SPST-2
+ModelTypeGroup2=SI
+ModelTypeUpdate2=1
+ModelType11=SI
+ModelName11=Cap
 ModelUpdate11=1
-ModelTypeGroup1=SI
-ModelTypeUpdate1=1
 ModelType12=SI
-ModelName12=Cap
+ModelName12=Connector
 ModelUpdate12=1
 ModelType13=SI
-ModelName13=Connector
+ModelName13=Res
 ModelUpdate13=1
-ModelType14=SI
-ModelName14=Res
+ModelTypeGroup3=SIM
+ModelTypeUpdate3=1
+ModelType14=SIM
+ModelName14=CAP
 ModelUpdate14=1
-ModelTypeGroup2=SIM
-ModelTypeUpdate2=1
 ModelType15=SIM
-ModelName15=CAP
+ModelName15=LED0
 ModelUpdate15=1
 ModelType16=SIM
-ModelName16=LED0
+ModelName16=RESISTOR
 ModelUpdate16=1
-ModelType17=SIM
-ModelName17=RESISTOR
-ModelUpdate17=1
 
 [DatabaseUpdateOptions]
 SelectedOnly=0
@@ -1277,7 +1217,4 @@ ComparisonOptions2=Kind=Component Class|MinPercent=75|MinMatch=3|ShowMatch=-1|Co
 ComparisonOptions3=Kind=Rule|MinPercent=75|MinMatch=3|ShowMatch=-1|Confirm=-1|UseName=-1|InclAllRules=0
 ComparisonOptions4=Kind=Differential Pair|MinPercent=50|MinMatch=1|ShowMatch=0|Confirm=0|UseName=0|InclAllRules=0
 ComparisonOptions5=Kind=Code Memory|MinPercent=75|MinMatch=3|ShowMatch=-1|Confirm=-1|UseName=-1|InclAllRules=0
-
-[SmartPDF]
-PageOptions=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-3|MediaType=1|DitherType=10|PrintScaleMode=1|PaperKind=A4|PaperIndex=9
 
