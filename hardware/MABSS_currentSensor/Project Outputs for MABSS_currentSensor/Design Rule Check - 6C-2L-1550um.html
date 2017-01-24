@@ -1,0 +1,742 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD16\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">21-1-2017</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">17:33:10</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc" class="file"><acronym title="C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc">C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">12</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">118</td></tr>
+</table>
+</td>
+</table><a name="IDV4F4L05CQIM1JLQYF1TD23ZQANCFX0OHKGCGHXHZVZ5DGRMFPABG"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFJDKXIU0W502DYN4YLY1FYH1FOROBXCAAFNGTDC0IB3MWBYWQ30I">Unplated multi-layer pad(s) detected</a></td>
+<td class="column2">12</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">12</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMHEF2GU3OOAQGTQOSUGXM0IW1JFM2AVJSVNMHAL4ZX4CVS1JS0CK">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRD54TW3JJ404GDSQX5JPWSWSSBO0WTOJY3QB1TIJEJ2BN0TTSUK">Silk to Silk (Clearance=0.2mm) (All),(All)</a></td>
+<td class="column2">6</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDSGHS24GPPHLVK4VMFTIXWSKWYP01MFNPOIQ2BSJMZGSE505O1Z3E">Silk To Solder Mask (Clearance=0.2mm) (IsPad),(All)</a></td>
+<td class="column2">22</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDR5QBRN5IIIQIOZNY5FUWBZI21F5ZSM0DIFAHCCMPHRA05FOSNGRF">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQMMYCLBGFCZBBMWM3PN3YETI5J2THN3XKA4MUVO21PDEMXLX12CN">Hole To Hole Clearance (Gap=0.15mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID53FP2YOYXCBCEQSPDA2NC5AX5O3KCRGJY3EWK3LEZDQ4SB4ZGBUL">Height Constraint (Min=0mm) (Max=25mm) (Prefered=12.5mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAP5FFGSVDESUK3X0K3Z4PVFAJI0F2WSKFLBIPPFOWZBXJVD2CVFM">Hole Size Constraint (Min=0.25mm) (Max=2mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDR5H5ANLPFF0UIQU32WGDQW5BVFQ3UE4ZPAVOBUE2I4VWS5OVNLN">Minimum Annular Ring (Minimum=0.225mm) (((ObjectKind = 'Pad') OR (ObjectKind = 'Via')) And (Layer = 'MultiLayer') And (HoleDiameter &lt;= AsMM(0.45)))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQZC3G3O220E3HTV5IWIXPQ1MFJ4ECEKRFMOARDDILICHSFSJ3JCK">Minimum Annular Ring (Minimum=0.25mm) (((ObjectKind = 'Pad') OR (ObjectKind = 'Via')) And (Layer = 'MultiLayer') And (HoleDiameter &gt; AsMM(0.45)))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHYTZI51O2FE0ND3P3ATGP51R1NLJR2M3QQNYGKFURXBFZ35KUE0E">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">90</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOZUZQCKTQ20VLYQKPCVJT0IZ4GVVXZHWVJBKVTFFIIETTMKCWBPL">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQSMFTBRGPO15JAZKX0SPJ2PUXPEMO4QHD5KV1DPNIR33AJPOQ2IB">Power Plane Connect Rule(Relief Connect )(Expansion=0.4mm) (Conductor Width=0.2mm) (Air Gap=0.2mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0CO3B33JBKE1CCZ1K1MDIWVIPLXODJ0QBPIZERIOW3NYHBJ2RC">Width Constraint (Min=0.15mm) (Max=1.5mm) (Preferred=0.2mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOXRSRL1AG4E2EZWCPNQTMP1U4PIXZQ5ISJGU4EGAKHPCNINYC1AO">Clearance Constraint (Gap=0.15mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZQ3JJ4VC2N5DMXEY5TXUOJDM2FRN5QUQQAYFA0PIHC1BGULCKABL">SMD Neck-Down Constraint (Percent=100%) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">118</td>
+</tr>
+</table><br><a name="IDVZSWU3FS1OWQFSJ0U1YJIE1GRN113HXYE0LOSBOYZJFQALCEDS4P"><h2>Warnings</h2></a><a name="IDFJDKXIU0W502DYN4YLY1FYH1FOROBXCAAFNGTDC0IB3MWBYWQ30I"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Unplated multi-layer pad(s) detected</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10006.691mil|Location2.X=10093.305mil|Location1.Y=10581.613mil|Location2.Y=10668.227mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10006.691mil|Location2.X=10093.305mil|Location1.Y=10581.613mil|Location2.Y=10668.227mil|Absolute=True">Pad HDRvSense-2(5.27mm,19.873mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9947.675mil|Location2.X=10643.207mil|Location1.Y=10581.613mil|Location2.Y=11087.601mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9947.675mil|Location2.X=10643.207mil|Location1.Y=10581.613mil|Location2.Y=11087.601mil|Absolute=True">Net NetC6_1</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9906.691mil|Location2.X=9993.305mil|Location1.Y=10581.613mil|Location2.Y=10668.227mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9906.691mil|Location2.X=9993.305mil|Location1.Y=10581.613mil|Location2.Y=10668.227mil|Absolute=True">Pad HDRvSense-1(2.73mm,19.873mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9906.691mil|Location2.X=10007.045mil|Location1.Y=10581.613mil|Location2.Y=10926.456mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9906.691mil|Location2.X=10007.045mil|Location1.Y=10581.613mil|Location2.Y=10926.456mil|Absolute=True">Net NetHDRvSense_1</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9923.228mil|Location1.Y=10001.771mil|Location2.Y=10060.826mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9923.228mil|Location1.Y=10001.771mil|Location2.Y=10060.826mil|Absolute=True">Pad LTSR 6-NP-ref(1.3mm,4.795mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=10111.715mil|Location1.Y=10001.771mil|Location2.Y=10142.717mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=10111.715mil|Location1.Y=10001.771mil|Location2.Y=10142.717mil|Absolute=True">Net NetLTSR 6-NP_ref</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9923.228mil|Location1.Y=10076.771mil|Location2.Y=10135.826mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9923.228mil|Location1.Y=10076.771mil|Location2.Y=10135.826mil|Absolute=True">Pad LTSR 6-NP-OUT(1.3mm,6.7mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=10111.715mil|Location1.Y=10076.771mil|Location2.Y=10162.403mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=10111.715mil|Location1.Y=10076.771mil|Location2.Y=10162.403mil|Absolute=True">Net NetLTSR 6-NP_OUT</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9923.228mil|Location1.Y=10151.771mil|Location2.Y=10210.826mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9923.228mil|Location1.Y=10151.771mil|Location2.Y=10210.826mil|Absolute=True">Pad LTSR 6-NP-GND(1.3mm,8.605mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=11265.355mil|Location1.Y=9979.409mil|Location2.Y=11087.601mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=11265.355mil|Location1.Y=9979.409mil|Location2.Y=11087.601mil|Absolute=True">Net GND</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9923.228mil|Location1.Y=10226.771mil|Location2.Y=10285.826mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9923.228mil|Location1.Y=10226.771mil|Location2.Y=10285.826mil|Absolute=True">Pad LTSR 6-NP-+5V(1.3mm,10.51mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=11063.465mil|Location1.Y=9919.29mil|Location2.Y=11038.268mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=11063.465mil|Location1.Y=9919.29mil|Location2.Y=11038.268mil|Absolute=True">Net +5V</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10237.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10237.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True">Pad LTSR 6-NP-6(8.92mm,1.3mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True">Net NetLTSR 6-NP_4</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10250.393mil|Location2.X=10337.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10250.393mil|Location2.X=10337.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True">Pad LTSR 6-NP-5(11.46mm,1.3mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True">Net NetLTSR 6-NP_4</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10350.393mil|Location2.X=10437.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10350.393mil|Location2.X=10437.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True">Pad LTSR 6-NP-4(14mm,1.3mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True">Net NetLTSR 6-NP_4</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10350.393mil|Location2.X=10437.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10350.393mil|Location2.X=10437.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True">Pad LTSR 6-NP-3(14mm,14mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True">Net NetLTSR 6-NP_1</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10250.393mil|Location2.X=10337.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10250.393mil|Location2.X=10337.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True">Pad LTSR 6-NP-2(11.46mm,14mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True">Net NetLTSR 6-NP_1</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10237.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10237.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True">Pad LTSR 6-NP-1(8.92mm,14mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10437.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True">Net NetLTSR 6-NP_1</acronym></a></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDRD54TW3JJ404GDSQX5JPWSWSSBO0WTOJY3QB1TIJEJ2BN0TTSUK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.2mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10389.475mil|Location2.X=10398.599mil|Location1.Y=11015.4mil|Location2.Y=11024.524mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10389.475mil|Location2.X=10398.599mil|Location1.Y=11015.4mil|Location2.Y=11024.524mil|Absolute=True">Silk To Silk Clearance Constraint: (0.16mm &lt; 0.2mm) Between Text "C3" (15mm,30mm) on Bottom Overlay And Track (14.028mm,28.528mm)(14.028mm,29.728mm) on Bottom Overlay Silk Text to Silk Clearance [0.16mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10242.807mil|Location2.X=10251.96mil|Location1.Y=11015.533mil|Location2.Y=11024.657mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10242.807mil|Location2.X=10251.96mil|Location1.Y=11015.533mil|Location2.Y=11024.657mil|Absolute=True">Silk To Silk Clearance Constraint: (0.193mm &lt; 0.2mm) Between Text "C2" (11mm,30mm) on Bottom Overlay And Track (10.356mm,28.528mm)(10.356mm,29.728mm) on Bottom Overlay Silk Text to Silk Clearance [0.193mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9921.873mil|Location2.X=9928.123mil|Location1.Y=11091.004mil|Location2.Y=11097.253mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9921.873mil|Location2.X=9928.123mil|Location1.Y=11091.004mil|Location2.Y=11097.253mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.2mm) Between Text "HDRvSense" (1.696mm,31.429mm) on Top Overlay And Track (2.095mm,28.89mm)(2.095mm,33.081mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10071.873mil|Location2.X=10078.123mil|Location1.Y=11076.757mil|Location2.Y=11083.006mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10071.873mil|Location2.X=10078.123mil|Location1.Y=11076.757mil|Location2.Y=11083.006mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.2mm) Between Text "HDRvSense" (1.696mm,31.429mm) on Top Overlay And Track (5.905mm,28.763mm)(5.905mm,33.081mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10106.873mil|Location2.X=10113.123mil|Location1.Y=11078.068mil|Location2.Y=11084.317mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10106.873mil|Location2.X=10113.123mil|Location1.Y=11078.068mil|Location2.Y=11084.317mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.2mm) Between Text "HDRvSense" (1.696mm,31.429mm) on Top Overlay And Track (6.794mm,20.381mm)(6.794mm,33.081mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11238.843mil|Location2.X=11245.093mil|Location1.Y=10086.553mil|Location2.Y=10092.803mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11238.843mil|Location2.X=11245.093mil|Location1.Y=10086.553mil|Location2.Y=10092.803mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.2mm) Between Text "HDR1" (35.5mm,8.5mm) on Top Overlay And Track (35.419mm,3.069mm)(35.419mm,10.562mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDSGHS24GPPHLVK4VMFTIXWSKWYP01MFNPOIQ2BSJMZGSE505O1Z3E"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.2mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10091.403mil|Location2.X=10100.527mil|Location1.Y=10251.137mil|Location2.Y=10260.261mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10091.403mil|Location2.X=10100.527mil|Location1.Y=10251.137mil|Location2.Y=10260.261mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.11mm &lt; 0.2mm) Between Arc (6.438mm,10.188mm) on Bottom Overlay And Pad C8-1(6.2mm,11mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10627.821mil|Location2.X=10636.945mil|Location1.Y=10960.212mil|Location2.Y=10969.336mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10627.821mil|Location2.X=10636.945mil|Location1.Y=10960.212mil|Location2.Y=10969.336mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.111mm &lt; 0.2mm) Between Arc (20.063mm,28.813mm) on Bottom Overlay And Pad C7-2(20.1mm,28mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.111mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10414.729mil|Location2.X=10423.853mil|Location1.Y=10955.103mil|Location2.Y=10964.227mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10414.729mil|Location2.X=10423.853mil|Location1.Y=10955.103mil|Location2.Y=10964.227mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.105mm &lt; 0.2mm) Between Arc (14.65mm,28.073mm) on Bottom Overlay And Pad C3-1(14.928mm,29.128mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.105mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9888.077mil|Location2.X=9894.326mil|Location1.Y=10400.662mil|Location2.Y=10406.911mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9888.077mil|Location2.X=9894.326mil|Location1.Y=10400.662mil|Location2.Y=10406.911mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.2mm) Between Text "C5" (1.746mm,15.294mm) on Bottom Overlay And Pad R5-2(1.504mm,14.134mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9956.807mil|Location2.X=9965.931mil|Location1.Y=10424.979mil|Location2.Y=10434.103mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9956.807mil|Location2.X=9965.931mil|Location1.Y=10424.979mil|Location2.Y=10434.103mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.153mm &lt; 0.2mm) Between Text "R5" (4mm,15mm) on Bottom Overlay And Pad R5-1(3.304mm,14.134mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.153mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10414.306mil|Location2.X=10423.43mil|Location1.Y=11015.411mil|Location2.Y=11024.535mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10414.306mil|Location2.X=10423.43mil|Location1.Y=11015.411mil|Location2.Y=11024.535mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.159mm &lt; 0.2mm) Between Text "C3" (15mm,30mm) on Bottom Overlay And Pad C3-1(14.928mm,29.128mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.159mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10257.395mil|Location2.X=10266.519mil|Location1.Y=11015.411mil|Location2.Y=11024.535mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10257.395mil|Location2.X=10266.519mil|Location1.Y=11015.411mil|Location2.Y=11024.535mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.159mm &lt; 0.2mm) Between Text "C2" (11mm,30mm) on Bottom Overlay And Pad C2-2(11.256mm,29.128mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.159mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10221.342mil|Location2.X=10230.466mil|Location1.Y=11015.674mil|Location2.Y=11024.798mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10221.342mil|Location2.X=10230.466mil|Location1.Y=11015.674mil|Location2.Y=11024.798mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.172mm &lt; 0.2mm) Between Text "C2" (11mm,30mm) on Bottom Overlay And Pad C2-1(9.456mm,29.128mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.172mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10045.436mil|Location2.X=10054.56mil|Location1.Y=10578.112mil|Location2.Y=10587.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10045.436mil|Location2.X=10054.56mil|Location1.Y=10578.112mil|Location2.Y=10587.236mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.2mm) Between Track (1.079mm,18.603mm)(7.175mm,18.603mm) on Top Overlay And Pad HDRvSense-2(5.27mm,19.873mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9945.436mil|Location2.X=9954.56mil|Location1.Y=10578.112mil|Location2.Y=10587.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9945.436mil|Location2.X=9954.56mil|Location1.Y=10578.112mil|Location2.Y=10587.236mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.2mm) Between Track (1.079mm,18.603mm)(7.175mm,18.603mm) on Top Overlay And Pad HDRvSense-1(2.73mm,19.873mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10917.486mil|Location2.X=10926.61mil|Location1.Y=10372.33mil|Location2.Y=10381.454mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10917.486mil|Location2.X=10926.61mil|Location1.Y=10372.33mil|Location2.Y=10381.454mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.2mm) Between Track (25.769mm,13.77mm)(36.437mm,13.77mm) on Bottom Overlay And Pad HDR3-1(27.42mm,12.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11017.486mil|Location2.X=11026.61mil|Location1.Y=10372.33mil|Location2.Y=10381.454mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11017.486mil|Location2.X=11026.61mil|Location1.Y=10372.33mil|Location2.Y=10381.454mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.2mm) Between Track (25.769mm,13.77mm)(36.437mm,13.77mm) on Bottom Overlay And Pad HDR3-2(29.96mm,12.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11117.486mil|Location2.X=11126.61mil|Location1.Y=10372.33mil|Location2.Y=10381.454mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11117.486mil|Location2.X=11126.61mil|Location1.Y=10372.33mil|Location2.Y=10381.454mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.2mm) Between Track (25.769mm,13.77mm)(36.437mm,13.77mm) on Bottom Overlay And Pad HDR3-3(32.5mm,12.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11217.486mil|Location2.X=11226.61mil|Location1.Y=10372.33mil|Location2.Y=10381.454mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11217.486mil|Location2.X=11226.61mil|Location1.Y=10372.33mil|Location2.Y=10381.454mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.2mm) Between Track (25.769mm,13.77mm)(36.437mm,13.77mm) on Bottom Overlay And Pad HDR3-4(35.04mm,12.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10917.486mil|Location2.X=10926.61mil|Location1.Y=10583.114mil|Location2.Y=10592.238mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10917.486mil|Location2.X=10926.61mil|Location1.Y=10583.114mil|Location2.Y=10592.238mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.2mm) Between Track (25.769mm,18.73mm)(36.437mm,18.73mm) on Top Overlay And Pad HDR2-1(27.42mm,20mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11017.486mil|Location2.X=11026.61mil|Location1.Y=10583.114mil|Location2.Y=10592.238mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11017.486mil|Location2.X=11026.61mil|Location1.Y=10583.114mil|Location2.Y=10592.238mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.2mm) Between Track (25.769mm,18.73mm)(36.437mm,18.73mm) on Top Overlay And Pad HDR2-2(29.96mm,20mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11117.486mil|Location2.X=11126.61mil|Location1.Y=10583.114mil|Location2.Y=10592.238mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11117.486mil|Location2.X=11126.61mil|Location1.Y=10583.114mil|Location2.Y=10592.238mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.2mm) Between Track (25.769mm,18.73mm)(36.437mm,18.73mm) on Top Overlay And Pad HDR2-3(32.5mm,20mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11217.486mil|Location2.X=11226.61mil|Location1.Y=10583.114mil|Location2.Y=10592.238mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11217.486mil|Location2.X=11226.61mil|Location1.Y=10583.114mil|Location2.Y=10592.238mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.2mm) Between Track (25.769mm,18.73mm)(36.437mm,18.73mm) on Top Overlay And Pad HDR2-4(35.04mm,20mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10749.376mil|Location2.X=10758.5mil|Location1.Y=9950.162mil|Location2.Y=9959.286mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10749.376mil|Location2.X=10758.5mil|Location1.Y=9950.162mil|Location2.Y=9959.286mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.2mm) Between Track (23.3mm,2.85mm)(23.7mm,2.85mm) on Top Overlay And Pad R2-2(22.75mm,2.5mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10749.376mil|Location2.X=10758.5mil|Location1.Y=9922.602mil|Location2.Y=9931.726mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10749.376mil|Location2.X=10758.5mil|Location1.Y=9922.602mil|Location2.Y=9931.726mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.2mm) Between Track (23.3mm,2.15mm)(23.7mm,2.15mm) on Top Overlay And Pad R2-2(22.75mm,2.5mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10776.936mil|Location2.X=10786.06mil|Location1.Y=9950.162mil|Location2.Y=9959.286mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10776.936mil|Location2.X=10786.06mil|Location1.Y=9950.162mil|Location2.Y=9959.286mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.2mm) Between Track (23.3mm,2.85mm)(23.7mm,2.85mm) on Top Overlay And Pad R2-1(24.25mm,2.5mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10776.936mil|Location2.X=10786.06mil|Location1.Y=9922.602mil|Location2.Y=9931.726mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10776.936mil|Location2.X=10786.06mil|Location1.Y=9922.602mil|Location2.Y=9931.726mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.2mm) Between Track (23.3mm,2.15mm)(23.7mm,2.15mm) on Top Overlay And Pad R2-1(24.25mm,2.5mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDHYTZI51O2FE0ND3P3ATGP51R1NLJR2M3QQNYGKFURXBFZ35KUE0E"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9874.015mil|Location2.X=9929.291mil|Location1.Y=10312.993mil|Location2.Y=10430.472mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9874.015mil|Location2.X=9929.291mil|Location1.Y=10312.993mil|Location2.Y=10430.472mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad C5-2(1.3mm,12.5mm) on Bottom Layer And Pad R5-2(1.504mm,14.134mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9923.228mil|Location1.Y=10226.771mil|Location2.Y=10356.299mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9923.228mil|Location1.Y=10226.771mil|Location2.Y=10356.299mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad LTSR 6-NP-+5V(1.3mm,10.51mm) on Multi-Layer [Unplated] And Pad C5-2(1.3mm,12.5mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10372.046mil|Location2.X=10466.534mil|Location1.Y=10898.542mil|Location2.Y=11020.786mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10372.046mil|Location2.X=10466.534mil|Location1.Y=10898.542mil|Location2.Y=11020.786mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad U3-1(14.65mm,27.223mm) on Bottom Layer And Pad C3-1(14.928mm,29.128mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10066.927mil|Location2.X=10111.715mil|Location1.Y=10191.931mil|Location2.Y=10297.244mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10066.927mil|Location2.X=10111.715mil|Location1.Y=10191.931mil|Location2.Y=10297.244mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad C8-1(6.2mm,11mm) on Bottom Layer And Pad U5-2(6.5mm,9mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10942.046mil|Location2.X=11063.465mil|Location1.Y=10904.056mil|Location2.Y=11038.268mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10942.046mil|Location2.X=11063.465mil|Location1.Y=10904.056mil|Location2.Y=11038.268mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad U2-8(29.278mm,27.413mm) on Bottom Layer And Pad C4-1(30.312mm,29.572mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.472mil|Location2.X=10348.7mil|Location1.Y=10119.489mil|Location2.Y=10235.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.472mil|Location2.X=10348.7mil|Location1.Y=10119.489mil|Location2.Y=10235.236mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad C1-1(10.73mm,7.735mm) on Bottom Layer And Pad U1-1(12.432mm,9.375mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10616.633mil|Location2.X=10708.661mil|Location1.Y=10923.228mil|Location2.Y=11028.545mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10616.633mil|Location2.X=10708.661mil|Location1.Y=10923.228mil|Location2.Y=11028.545mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad U6-2(20mm,30mm) on Bottom Layer [Unplated] And Pad C7-1(21.5mm,28mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10315.236mil|Location2.X=10755.906mil|Location1.Y=9919.29mil|Location2.Y=10235.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10315.236mil|Location2.X=10755.906mil|Location1.Y=9919.29mil|Location2.Y=10235.236mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad U1-1(12.432mm,9.375mm) on Bottom Layer And Pad R2-2(22.75mm,2.5mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=10106.297mil|Location1.Y=10226.771mil|Location2.Y=10297.244mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=10106.297mil|Location1.Y=10226.771mil|Location2.Y=10297.244mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad LTSR 6-NP-+5V(1.3mm,10.51mm) on Multi-Layer [Unplated] And Pad C8-1(6.2mm,11mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10085.141mil|Location2.X=10296.464mil|Location1.Y=10119.489mil|Location2.Y=10201.773mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10085.141mil|Location2.X=10296.464mil|Location1.Y=10119.489mil|Location2.Y=10201.773mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad U5-2(6.5mm,9mm) on Bottom Layer [Unplated] And Pad C1-1(10.73mm,7.735mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10402.675mil|Location2.X=10643.207mil|Location1.Y=10957.794mil|Location2.Y=11028.545mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10402.675mil|Location2.X=10643.207mil|Location1.Y=10957.794mil|Location2.Y=11028.545mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad C3-1(14.928mm,29.128mm) on Bottom Layer And Pad U6-2(20mm,30mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10669.291mil|Location2.X=11048.346mil|Location1.Y=10904.056mil|Location2.Y=10966.535mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10669.291mil|Location2.X=11048.346mil|Location1.Y=10904.056mil|Location2.Y=10966.535mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad C7-1(21.5mm,28mm) on Bottom Layer And Pad U2-8(29.278mm,27.413mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10315.236mil|Location2.X=10466.534mil|Location1.Y=10187.992mil|Location2.Y=10930.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10315.236mil|Location2.X=10466.534mil|Location1.Y=10187.992mil|Location2.Y=10930.038mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad U1-1(12.432mm,9.375mm) on Bottom Layer And Pad U3-1(14.65mm,27.223mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9853.11mil|Location2.X=9934.29mil|Location1.Y=10215.708mil|Location2.Y=10296.888mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9853.11mil|Location2.X=9934.29mil|Location1.Y=10215.708mil|Location2.Y=10296.888mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad LTSR 6-NP-+5V(1.3mm,10.51mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10288.109mil|Location2.X=10386.927mil|Location1.Y=10948.581mil|Location2.Y=11035.195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10288.109mil|Location2.X=10386.927mil|Location1.Y=10948.581mil|Location2.Y=11035.195mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad S1-2(12.218mm,29.194mm) on Top Layer And Pad C3-2(13.128mm,29.128mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10729.823mil|Location2.X=10756.397mil|Location1.Y=11038.387mil|Location2.Y=11087.601mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10729.823mil|Location2.X=10756.397mil|Location1.Y=11038.387mil|Location2.Y=11087.601mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U6-8(22.875mm,30.5mm) on Bottom Layer [Unplated] And Pad U6-6(22.875mm,31.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9971.951mil|Location2.X=9998.525mil|Location1.Y=10132.875mil|Location2.Y=10182.089mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9971.951mil|Location2.X=9998.525mil|Location1.Y=10132.875mil|Location2.Y=10182.089mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U5-6(3.625mm,7.5mm) on Bottom Layer [Unplated] And Pad U5-8(3.625mm,8.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10258.109mil|Location2.X=10358.975mil|Location1.Y=10948.581mil|Location2.Y=11035.195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10258.109mil|Location2.X=10358.975mil|Location1.Y=10948.581mil|Location2.Y=11035.195mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C2-2(11.256mm,29.128mm) on Bottom Layer And Pad S1-2(12.218mm,29.194mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10183.07mil|Location2.X=10277.558mil|Location1.Y=10798.542mil|Location2.Y=10880.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10183.07mil|Location2.X=10277.558mil|Location1.Y=10798.542mil|Location2.Y=10880.038mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-6(9.85mm,24.683mm) on Bottom Layer And Pad U3-7(9.85mm,25.953mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10372.046mil|Location2.X=10466.534mil|Location1.Y=10798.542mil|Location2.Y=10880.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10372.046mil|Location2.X=10466.534mil|Location1.Y=10798.542mil|Location2.Y=10880.038mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-3(14.65mm,24.683mm) on Bottom Layer And Pad U3-2(14.65mm,25.953mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10614.173mil|Location2.X=10653.543mil|Location1.Y=10923.228mil|Location2.Y=11008.859mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10614.173mil|Location2.X=10653.543mil|Location1.Y=10923.228mil|Location2.Y=11008.859mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U6-1(20mm,29.5mm) on Bottom Layer [Unplated] And Pad C7-2(20.1mm,28mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9998.525mil|Location1.Y=10151.771mil|Location2.Y=10210.826mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=9998.525mil|Location1.Y=10151.771mil|Location2.Y=10210.826mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad LTSR 6-NP-GND(1.3mm,8.605mm) on Multi-Layer [Unplated] And Pad U5-8(3.625mm,8.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.472mil|Location2.X=10348.7mil|Location1.Y=9997.992mil|Location2.Y=10103.741mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.472mil|Location2.X=10348.7mil|Location1.Y=9997.992mil|Location2.Y=10103.741mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C1-2(10.73mm,5.935mm) on Bottom Layer And Pad U1-14(12.432mm,4.549mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10011.809mil|Location2.X=10111.715mil|Location1.Y=10211.617mil|Location2.Y=10297.244mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10011.809mil|Location2.X=10111.715mil|Location1.Y=10211.617mil|Location2.Y=10297.244mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C8-2(4.8mm,11mm) on Bottom Layer And Pad U5-1(6.5mm,9.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10283.346mil|Location2.X=10466.534mil|Location1.Y=10518.542mil|Location2.Y=10599.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10283.346mil|Location2.X=10466.534mil|Location1.Y=10518.542mil|Location2.Y=10599.093mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R1-2(11.997mm,18.517mm) on Top Layer And Pad U4-4(14.65mm,17.571mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9929.133mil|Location2.X=10051.179mil|Location1.Y=10253.936mil|Location2.Y=10356.299mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9929.133mil|Location2.X=10051.179mil|Location1.Y=10253.936mil|Location2.Y=10356.299mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C5-1(2.7mm,12.5mm) on Bottom Layer And Pad C8-2(4.8mm,11mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11178.741mil|Location2.X=11265.355mil|Location1.Y=10291.339mil|Location2.Y=10673.229mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11178.741mil|Location2.X=11265.355mil|Location1.Y=10291.339mil|Location2.Y=10673.229mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad HDR3-4(35.04mm,12.5mm) on Multi-Layer And Pad HDR2-4(35.04mm,20mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10942.046mil|Location2.X=11134.331mil|Location1.Y=10754.056mil|Location2.Y=11038.268mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10942.046mil|Location2.X=11134.331mil|Location1.Y=10754.056mil|Location2.Y=11038.268mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U2-5(29.278mm,23.603mm) on Bottom Layer And Pad C4-2(32.112mm,29.572mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11055.59mil|Location2.X=11265.355mil|Location1.Y=9979.409mil|Location2.Y=10377.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11055.59mil|Location2.X=11265.355mil|Location1.Y=9979.409mil|Location2.Y=10377.953mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad HDR1-6(32.752mm,4.212mm) on Top Layer [Unplated] And Pad HDR3-4(35.04mm,12.5mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9971.951mil|Location2.X=10051.179mil|Location1.Y=10172.247mil|Location2.Y=10297.244mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9971.951mil|Location2.X=10051.179mil|Location1.Y=10172.247mil|Location2.Y=10297.244mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U5-8(3.625mm,8.5mm) on Bottom Layer [Unplated] And Pad C8-2(4.8mm,11mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10616.633mil|Location2.X=10756.397mil|Location1.Y=10999.017mil|Location2.Y=11048.229mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10616.633mil|Location2.X=10756.397mil|Location1.Y=10999.017mil|Location2.Y=11048.229mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U6-1(20mm,29.5mm) on Bottom Layer [Unplated] And Pad U6-8(22.875mm,30.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10183.07mil|Location2.X=10313.227mil|Location1.Y=10848.542mil|Location2.Y=11020.786mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10183.07mil|Location2.X=10313.227mil|Location1.Y=10848.542mil|Location2.Y=11020.786mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-7(9.85mm,25.953mm) on Bottom Layer And Pad C2-2(11.256mm,29.128mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10331.809mil|Location2.X=10466.534mil|Location1.Y=10848.542mil|Location2.Y=11020.786mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10331.809mil|Location2.X=10466.534mil|Location1.Y=10848.542mil|Location2.Y=11020.786mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C3-2(13.128mm,29.128mm) on Bottom Layer And Pad U3-2(14.65mm,25.953mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10372.046mil|Location2.X=10466.534mil|Location1.Y=10518.542mil|Location2.Y=10830.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10372.046mil|Location2.X=10466.534mil|Location1.Y=10518.542mil|Location2.Y=10830.038mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U4-4(14.65mm,17.571mm) on Bottom Layer And Pad U3-3(14.65mm,24.683mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10085.141mil|Location2.X=10296.464mil|Location1.Y=10048.623mil|Location2.Y=10221.459mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10085.141mil|Location2.X=10296.464mil|Location1.Y=10048.623mil|Location2.Y=10221.459mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U5-1(6.5mm,9.5mm) on Bottom Layer [Unplated] And Pad C1-2(10.73mm,5.935mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10942.046mil|Location2.X=11265.355mil|Location1.Y=10586.615mil|Location2.Y=10789.488mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10942.046mil|Location2.X=11265.355mil|Location1.Y=10586.615mil|Location2.Y=10789.488mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U2-5(29.278mm,23.603mm) on Bottom Layer And Pad HDR2-4(35.04mm,20mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10331.809mil|Location2.X=10643.207mil|Location1.Y=10957.794mil|Location2.Y=11020.786mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10331.809mil|Location2.X=10643.207mil|Location1.Y=10957.794mil|Location2.Y=11020.786mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C3-2(13.128mm,29.128mm) on Bottom Layer And Pad U6-1(20mm,29.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10729.823mil|Location2.X=11134.331mil|Location1.Y=10975.276mil|Location2.Y=11048.229mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10729.823mil|Location2.X=11134.331mil|Location1.Y=10975.276mil|Location2.Y=11048.229mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U6-8(22.875mm,30.5mm) on Bottom Layer [Unplated] And Pad C4-2(32.112mm,29.572mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.472mil|Location2.X=10346.338mil|Location1.Y=10048.623mil|Location2.Y=10599.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.472mil|Location2.X=10346.338mil|Location1.Y=10048.623mil|Location2.Y=10599.093mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C1-2(10.73mm,5.935mm) on Bottom Layer And Pad R1-2(11.997mm,18.517mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9853.11mil|Location2.X=9934.29mil|Location1.Y=10140.708mil|Location2.Y=10221.888mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9853.11mil|Location2.X=9934.29mil|Location1.Y=10140.708mil|Location2.Y=10221.888mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad LTSR 6-NP-GND(1.3mm,8.605mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9947.675mil|Location2.X=10007.045mil|Location1.Y=10773.307mil|Location2.Y=11006.456mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9947.675mil|Location2.X=10007.045mil|Location1.Y=10773.307mil|Location2.Y=11006.456mil|Absolute=True">Un-Routed Net Constraint: Net NetC6_1 Between Pad C6-1(3.171mm,24.192mm) on Bottom Layer And Pad R4-2(3.479mm,28.764mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9947.675mil|Location2.X=10093.305mil|Location1.Y=10581.613mil|Location2.Y=10816.613mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9947.675mil|Location2.X=10093.305mil|Location1.Y=10581.613mil|Location2.Y=10816.613mil|Absolute=True">Un-Routed Net Constraint: Net NetC6_1 Between Pad C6-1(3.171mm,24.192mm) on Bottom Layer And Pad HDRvSense-2(5.27mm,19.873mm) on Multi-Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9951.927mil|Location2.X=10643.207mil|Location1.Y=10943.464mil|Location2.Y=11087.601mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9951.927mil|Location2.X=10643.207mil|Location1.Y=10943.464mil|Location2.Y=11087.601mil|Absolute=True">Un-Routed Net Constraint: Net NetC6_1 Between Pad R4-2(3.479mm,28.764mm) on Bottom Layer And Pad U6-5(20mm,31.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9995.628mil|Location2.X=10104.368mil|Location1.Y=10570.55mil|Location2.Y=10679.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9995.628mil|Location2.X=10104.368mil|Location1.Y=10570.55mil|Location2.Y=10679.29mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad HDRvSense-2(5.27mm,19.873mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10022.793mil|Location2.X=10077.911mil|Location1.Y=10863.464mil|Location2.Y=11006.456mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10022.793mil|Location2.X=10077.911mil|Location1.Y=10863.464mil|Location2.Y=11006.456mil|Absolute=True">Un-Routed Net Constraint: Net NetC6_2 Between Pad R3-1(5.279mm,26.732mm) on Bottom Layer And Pad R4-1(5.279mm,28.764mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10002.795mil|Location2.X=10077.911mil|Location1.Y=10773.307mil|Location2.Y=10926.456mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10002.795mil|Location2.X=10077.911mil|Location1.Y=10773.307mil|Location2.Y=10926.456mil|Absolute=True">Un-Routed Net Constraint: Net NetC6_2 Between Pad C6-2(4.571mm,24.192mm) on Bottom Layer And Pad R3-1(5.279mm,26.732mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10022.793mil|Location2.X=10643.207mil|Location1.Y=10943.464mil|Location2.Y=11067.915mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10022.793mil|Location2.X=10643.207mil|Location1.Y=10943.464mil|Location2.Y=11067.915mil|Absolute=True">Un-Routed Net Constraint: Net NetC6_2 Between Pad R4-1(5.279mm,28.764mm) on Bottom Layer And Pad U6-4(20mm,31mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10250.393mil|Location2.X=10437.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10250.393mil|Location2.X=10437.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True">Un-Routed Net Constraint: Net NetLTSR 6-NP_1 Between Pad LTSR 6-NP-2(11.46mm,14mm) on Multi-Layer [Unplated] And Pad LTSR 6-NP-3(14mm,14mm) on Multi-Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10337.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10337.007mil|Location1.Y=10350.393mil|Location2.Y=10437.007mil|Absolute=True">Un-Routed Net Constraint: Net NetLTSR 6-NP_1 Between Pad LTSR 6-NP-1(8.92mm,14mm) on Multi-Layer [Unplated] And Pad LTSR 6-NP-2(11.46mm,14mm) on Multi-Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10139.33mil|Location2.X=10248.07mil|Location1.Y=10339.33mil|Location2.Y=10448.07mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10139.33mil|Location2.X=10248.07mil|Location1.Y=10339.33mil|Location2.Y=10448.07mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad LTSR 6-NP-1(8.92mm,14mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10239.33mil|Location2.X=10348.07mil|Location1.Y=10339.33mil|Location2.Y=10448.07mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10239.33mil|Location2.X=10348.07mil|Location1.Y=10339.33mil|Location2.Y=10448.07mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad LTSR 6-NP-2(11.46mm,14mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10339.33mil|Location2.X=10448.07mil|Location1.Y=10339.33mil|Location2.Y=10448.07mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10339.33mil|Location2.X=10448.07mil|Location1.Y=10339.33mil|Location2.Y=10448.07mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad LTSR 6-NP-3(14mm,14mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10250.393mil|Location2.X=10437.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10250.393mil|Location2.X=10437.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True">Un-Routed Net Constraint: Net NetLTSR 6-NP_4 Between Pad LTSR 6-NP-5(11.46mm,1.3mm) on Multi-Layer [Unplated] And Pad LTSR 6-NP-4(14mm,1.3mm) on Multi-Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10337.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10150.393mil|Location2.X=10337.007mil|Location1.Y=9850.393mil|Location2.Y=9937.007mil|Absolute=True">Un-Routed Net Constraint: Net NetLTSR 6-NP_4 Between Pad LTSR 6-NP-6(8.92mm,1.3mm) on Multi-Layer [Unplated] And Pad LTSR 6-NP-5(11.46mm,1.3mm) on Multi-Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10139.33mil|Location2.X=10248.07mil|Location1.Y=9839.33mil|Location2.Y=9948.07mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10139.33mil|Location2.X=10248.07mil|Location1.Y=9839.33mil|Location2.Y=9948.07mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad LTSR 6-NP-6(8.92mm,1.3mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10239.33mil|Location2.X=10348.07mil|Location1.Y=9839.33mil|Location2.Y=9948.07mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10239.33mil|Location2.X=10348.07mil|Location1.Y=9839.33mil|Location2.Y=9948.07mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad LTSR 6-NP-5(11.46mm,1.3mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10339.33mil|Location2.X=10448.07mil|Location1.Y=9839.33mil|Location2.Y=9948.07mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10339.33mil|Location2.X=10448.07mil|Location1.Y=9839.33mil|Location2.Y=9948.07mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad LTSR 6-NP-4(14mm,1.3mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=10111.715mil|Location1.Y=10076.771mil|Location2.Y=10162.403mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=10111.715mil|Location1.Y=10076.771mil|Location2.Y=10162.403mil|Absolute=True">Un-Routed Net Constraint: Net NetLTSR 6-NP_OUT Between Pad LTSR 6-NP-OUT(1.3mm,6.7mm) on Multi-Layer [Unplated] And Pad U5-4(6.5mm,8mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9853.11mil|Location2.X=9934.29mil|Location1.Y=10065.708mil|Location2.Y=10146.888mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9853.11mil|Location2.X=9934.29mil|Location1.Y=10065.708mil|Location2.Y=10146.888mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad LTSR 6-NP-OUT(1.3mm,6.7mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=10111.715mil|Location1.Y=10001.771mil|Location2.Y=10142.717mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9864.173mil|Location2.X=10111.715mil|Location1.Y=10001.771mil|Location2.Y=10142.717mil|Absolute=True">Un-Routed Net Constraint: Net NetLTSR 6-NP_ref Between Pad LTSR 6-NP-ref(1.3mm,4.795mm) on Multi-Layer [Unplated] And Pad U5-5(6.5mm,7.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9853.11mil|Location2.X=9934.29mil|Location1.Y=9990.708mil|Location2.Y=10071.888mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9853.11mil|Location2.X=9934.29mil|Location1.Y=9990.708mil|Location2.Y=10071.888mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad LTSR 6-NP-ref(1.3mm,4.795mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10353.189mil|Location2.X=10398.7mil|Location1.Y=10187.992mil|Location2.Y=10619.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10353.189mil|Location2.X=10398.7mil|Location1.Y=10187.992mil|Location2.Y=10619.093mil|Absolute=True">Un-Routed Net Constraint: Net NetD1_1 Between Pad D1-1(13.521mm,19.225mm) on Top Layer And Pad U1-2(13.702mm,9.375mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10283.346mil|Location2.X=10396.496mil|Location1.Y=10614.841mil|Location2.Y=10674.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10283.346mil|Location2.X=10396.496mil|Location1.Y=10614.841mil|Location2.Y=10674.213mil|Absolute=True">Un-Routed Net Constraint: Net NetD1_2 Between Pad R1-1(11.997mm,20.317mm) on Top Layer And Pad D1-2(13.521mm,20.625mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10615.236mil|Location2.X=11033.346mil|Location1.Y=9997.992mil|Location2.Y=10237.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10615.236mil|Location2.X=11033.346mil|Location1.Y=9997.992mil|Location2.Y=10237.283mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR1_1 Between Pad U1-8(20.052mm,4.549mm) on Bottom Layer And Pad HDR1-1(28.307mm,9.292mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10565.236mil|Location2.X=11033.346mil|Location1.Y=9997.992mil|Location2.Y=10137.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10565.236mil|Location2.X=11033.346mil|Location1.Y=9997.992mil|Location2.Y=10137.283mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR1_3 Between Pad U1-9(18.782mm,4.549mm) on Bottom Layer And Pad HDR1-3(28.307mm,6.752mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9971.951mil|Location2.X=10598.7mil|Location1.Y=9997.992mil|Location2.Y=10201.773mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9971.951mil|Location2.X=10598.7mil|Location1.Y=9997.992mil|Location2.Y=10201.773mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR1_3 Between Pad U5-9(3.625mm,9mm) on Bottom Layer [Unplated] And Pad U1-9(18.782mm,4.549mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10615.236mil|Location2.X=11208.346mil|Location1.Y=10079.409mil|Location2.Y=10235.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10615.236mil|Location2.X=11208.346mil|Location1.Y=10079.409mil|Location2.Y=10235.236mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR1_4 Between Pad U1-7(20.052mm,9.375mm) on Bottom Layer And Pad HDR1-4(32.752mm,6.752mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9971.951mil|Location2.X=10648.7mil|Location1.Y=10152.561mil|Location2.Y=10235.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9971.951mil|Location2.X=10648.7mil|Location1.Y=10152.561mil|Location2.Y=10235.236mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR1_4 Between Pad U5-7(3.625mm,8mm) on Bottom Layer [Unplated] And Pad U1-7(20.052mm,9.375mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10615.236mil|Location2.X=10756.397mil|Location1.Y=10187.992mil|Location2.Y=11067.915mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10615.236mil|Location2.X=10756.397mil|Location1.Y=10187.992mil|Location2.Y=11067.915mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR1_4 Between Pad U1-7(20.052mm,9.375mm) on Bottom Layer And Pad U6-7(22.875mm,31mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10779.53mil|Location2.X=11033.346mil|Location1.Y=9919.29mil|Location2.Y=10037.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10779.53mil|Location2.X=11033.346mil|Location1.Y=9919.29mil|Location2.Y=10037.283mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR1_5 Between Pad R2-1(24.25mm,2.5mm) on Top Layer And Pad HDR1-5(28.307mm,4.212mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10465.236mil|Location2.X=10814.962mil|Location1.Y=9919.29mil|Location2.Y=10235.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10465.236mil|Location2.X=10814.962mil|Location1.Y=9919.29mil|Location2.Y=10235.236mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR1_5 Between Pad U1-4(16.242mm,9.375mm) on Bottom Layer And Pad R2-1(24.25mm,2.5mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10942.046mil|Location2.X=11065.355mil|Location1.Y=10586.615mil|Location2.Y=10839.488mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10942.046mil|Location2.X=11065.355mil|Location1.Y=10586.615mil|Location2.Y=10839.488mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR2_2 Between Pad U2-6(29.278mm,24.873mm) on Bottom Layer And Pad HDR2-2(29.96mm,20mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10978.741mil|Location2.X=11065.355mil|Location1.Y=10291.339mil|Location2.Y=10673.229mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10978.741mil|Location2.X=11065.355mil|Location1.Y=10291.339mil|Location2.Y=10673.229mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR2_2 Between Pad HDR3-2(29.96mm,12.5mm) on Multi-Layer And Pad HDR2-2(29.96mm,20mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11078.741mil|Location2.X=11165.355mil|Location1.Y=10291.339mil|Location2.Y=10673.229mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11078.741mil|Location2.X=11165.355mil|Location1.Y=10291.339mil|Location2.Y=10673.229mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR2_3 Between Pad HDR3-3(32.5mm,12.5mm) on Multi-Layer And Pad HDR2-3(32.5mm,20mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10942.046mil|Location2.X=11165.355mil|Location1.Y=10586.615mil|Location2.Y=10889.488mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10942.046mil|Location2.X=11165.355mil|Location1.Y=10586.615mil|Location2.Y=10889.488mil|Absolute=True">Un-Routed Net Constraint: Net NetHDR2_3 Between Pad U2-7(29.278mm,26.143mm) on Bottom Layer And Pad HDR2-3(32.5mm,20mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9906.691mil|Location2.X=10007.045mil|Location1.Y=10581.613mil|Location2.Y=10926.456mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9906.691mil|Location2.X=10007.045mil|Location1.Y=10581.613mil|Location2.Y=10926.456mil|Absolute=True">Un-Routed Net Constraint: Net NetHDRvSense_1 Between Pad HDRvSense-1(2.73mm,19.873mm) on Multi-Layer [Unplated] And Pad R3-2(3.479mm,26.732mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9895.628mil|Location2.X=10004.368mil|Location1.Y=10570.55mil|Location2.Y=10679.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9895.628mil|Location2.X=10004.368mil|Location1.Y=10570.55mil|Location2.Y=10679.29mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad HDRvSense-1(2.73mm,19.873mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9945.039mil|Location2.X=10111.715mil|Location1.Y=10172.247mil|Location2.Y=10430.472mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9945.039mil|Location2.X=10111.715mil|Location1.Y=10172.247mil|Location2.Y=10430.472mil|Absolute=True">Un-Routed Net Constraint: Net NetR5_1 Between Pad R5-1(3.304mm,14.134mm) on Bottom Layer And Pad U5-3(6.5mm,8.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10085.141mil|Location2.X=10398.7mil|Location1.Y=9997.992mil|Location2.Y=10182.089mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10085.141mil|Location2.X=10398.7mil|Location1.Y=9997.992mil|Location2.Y=10182.089mil|Absolute=True">Un-Routed Net Constraint: Net NetR5_1 Between Pad U5-3(6.5mm,8.5mm) on Bottom Layer [Unplated] And Pad U1-13(13.702mm,4.549mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9945.039mil|Location2.X=10277.558mil|Location1.Y=10367.48mil|Location2.Y=10600.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9945.039mil|Location2.X=10277.558mil|Location1.Y=10367.48mil|Location2.Y=10600.038mil|Absolute=True">Un-Routed Net Constraint: Net NetR5_1 Between Pad R5-1(3.304mm,14.134mm) on Bottom Layer And Pad U4-6(9.85mm,18.841mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10183.07mil|Location2.X=10643.207mil|Location1.Y=10568.542mil|Location2.Y=11048.229mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10183.07mil|Location2.X=10643.207mil|Location1.Y=10568.542mil|Location2.Y=11048.229mil|Absolute=True">Un-Routed Net Constraint: Net NetR5_1 Between Pad U4-6(9.85mm,18.841mm) on Bottom Layer And Pad U6-3(20mm,30.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10288.109mil|Location2.X=10448.7mil|Location1.Y=10187.992mil|Location2.Y=10822.597mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10288.109mil|Location2.X=10448.7mil|Location1.Y=10187.992mil|Location2.Y=10822.597mil|Absolute=True">Un-Routed Net Constraint: Net NetS1_1 Between Pad S1-1(12.218mm,23.794mm) on Top Layer And Pad U1-3(14.972mm,9.375mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10465.236mil|Location2.X=11241.26mil|Location1.Y=9997.992mil|Location2.Y=10939.488mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10465.236mil|Location2.X=11241.26mil|Location1.Y=9997.992mil|Location2.Y=10939.488mil|Absolute=True">Un-Routed Net Constraint: Net NetU1_11 Between Pad U1-11(16.242mm,4.549mm) on Bottom Layer And Pad U2-1(34.178mm,27.413mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11134.96mil|Location2.X=11241.26mil|Location1.Y=10804.056mil|Location2.Y=10889.488mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11134.96mil|Location2.X=11241.26mil|Location1.Y=10804.056mil|Location2.Y=10889.488mil|Absolute=True">Un-Routed Net Constraint: Net NetU1_10 Between Pad U2-3(34.178mm,24.873mm) on Bottom Layer And Pad U2-2(34.178mm,26.143mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10515.236mil|Location2.X=11241.26mil|Location1.Y=9997.992mil|Location2.Y=10839.488mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10515.236mil|Location2.X=11241.26mil|Location1.Y=9997.992mil|Location2.Y=10839.488mil|Absolute=True">Un-Routed Net Constraint: Net NetU1_10 Between Pad U1-10(17.512mm,4.549mm) on Bottom Layer And Pad U2-3(34.178mm,24.873mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10415.236mil|Location2.X=11241.26mil|Location1.Y=9997.992mil|Location2.Y=10789.488mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10415.236mil|Location2.X=11241.26mil|Location1.Y=9997.992mil|Location2.Y=10789.488mil|Absolute=True">Un-Routed Net Constraint: Net NetU1_12 Between Pad U1-12(14.972mm,4.549mm) on Bottom Layer And Pad U2-4(34.178mm,23.603mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10183.07mil|Location2.X=10277.558mil|Location1.Y=10898.542mil|Location2.Y=11020.786mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10183.07mil|Location2.X=10277.558mil|Location1.Y=10898.542mil|Location2.Y=11020.786mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad C2-1(9.456mm,29.128mm) on Bottom Layer And Pad U3-8(9.85mm,27.223mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10878.741mil|Location2.X=10965.355mil|Location1.Y=10291.339mil|Location2.Y=10673.229mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10878.741mil|Location2.X=10965.355mil|Location1.Y=10291.339mil|Location2.Y=10673.229mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad HDR3-1(27.42mm,12.5mm) on Multi-Layer And Pad HDR2-1(27.42mm,20mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10878.741mil|Location2.X=11208.346mil|Location1.Y=10179.409mil|Location2.Y=10377.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10878.741mil|Location2.X=11208.346mil|Location1.Y=10179.409mil|Location2.Y=10377.953mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad HDR3-1(27.42mm,12.5mm) on Multi-Layer And Pad HDR1-2(32.752mm,9.292mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10183.07mil|Location2.X=10965.355mil|Location1.Y=10586.615mil|Location2.Y=10930.038mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\6C-2L-1550um.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10183.07mil|Location2.X=10965.355mil|Location1.Y=10586.615mil|Location2.Y=10930.038mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad U3-8(9.85mm,27.223mm) on Bottom Layer And Pad HDR2-1(27.42mm,20mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

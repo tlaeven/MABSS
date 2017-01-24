@@ -1,0 +1,525 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD16\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">18-1-2017</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">17:08:15</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc" class="file"><acronym title="C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc">C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">63</td></tr>
+</table>
+</td>
+</table><a name="IDTQY4TWUNNM4FPU4KA0NBFBGATKAO0T1L4HTDI1E2P2MY3LVOKQRL"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4OGYFVMUHLKJCB51VAIYAWXKNNNN40HQDL5W03J2FRFJKEC1WYSK">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDG13COE25SO3MJX0SQL4IWWD2DBXTMAK2LVWARDCO5QRXVRGVA0AG">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAYZU1FFSBYNMMWQCIA0G2YUXROXKOCOVGHIJMPJDA5QODR3CH4AE">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3DM0JSPPL3GRDSJZEJ2EZ5SZWCGOELE3KL2XGXBKQWJPZLFFSMKL">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGFRSUNDV0KHCJIYQ0K5FNBLRVIT4R5OFDFPGO5KUMU5HI1AMRNKP">Width Constraint (Min=0.254mm) (Max=2mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID1LXUXTWYN0IS1QXYWTN4UERJID45EKM01I1YNPUOV2IR1SX0YGP">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAIOEQ3FDZVLTLWLGNWUWDO35JFPY4ALTJDUA1NJV3IQIOSNQJ35H">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMWPW2V4T3V2QMSXTVTNF1D5U4JOIMKQAXYE1TSKVHKFLRHTRD0EP">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGRFQF4PVRNHDPOPPG5I4D5JWJN0NSXCLQBMHWIHYFKXVET3YLADB">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">12</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNFJFGCWIJCSHEVLG15RCBYXSJMBYR5XXID2JRDF3JEXWGT4CYC2C">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">49</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDD4HRTF2XF54AOC2VPD23IDD00VB5XNNNQ3SP2DDDVHAMG453LFD">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOS0ZGCNSZNDCF2UJ5NOE4BOATCBX1P5EI1GVVNHBWBFPIS422GKL">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID33B3V0K0O24IDQNL1CLCD3BBTCNX3TLIWLGG1FOVWTCNLWXCMDO">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">63</td>
+</tr>
+</table><br><a name="IDGRFQF4PVRNHDPOPPG5I4D5JWJN0NSXCLQBMHWIHYFKXVET3YLADB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1178.564mil|Location2.X=1189.814mil|Location1.Y=4517.375mil|Location2.Y=4528.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1178.564mil|Location2.X=1189.814mil|Location1.Y=4517.375mil|Location2.Y=4528.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.162mm &lt; 0.254mm) Between Via (-12.903mm,8.712mm) from Top Layer to Bottom Layer And Pad C1-1(-11.303mm,9.144mm) on Top Layer [Top Solder] Mask Sliver [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.596mil|Location2.X=1341.846mil|Location1.Y=4842.187mil|Location2.Y=4853.437mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.596mil|Location2.X=1341.846mil|Location1.Y=4842.187mil|Location2.Y=4853.437mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.171mm &lt; 0.254mm) Between Pad R1_A-1(-9.111mm,17.156mm) on Top Layer And Pad D1-2(-7.587mm,17.464mm) on Top Layer [Top Solder] Mask Sliver [0.171mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1381.915mil|Location2.X=1393.165mil|Location1.Y=4787.067mil|Location2.Y=4798.317mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1381.915mil|Location2.X=1393.165mil|Location1.Y=4787.067mil|Location2.Y=4798.317mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.23mm &lt; 0.254mm) Between Pad R2-1(-6.254mm,15.174mm) on Top Layer And Pad D1-1(-7.587mm,16.064mm) on Top Layer [Top Solder] Mask Sliver [0.23mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.596mil|Location2.X=1341.846mil|Location1.Y=4787.067mil|Location2.Y=4798.317mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.596mil|Location2.X=1341.846mil|Location1.Y=4787.067mil|Location2.Y=4798.317mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.171mm &lt; 0.254mm) Between Pad R1_A-2(-9.111mm,15.356mm) on Top Layer And Pad D1-1(-7.587mm,16.064mm) on Top Layer [Top Solder] Mask Sliver [0.171mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.596mil|Location2.X=1341.846mil|Location1.Y=4822.185mil|Location2.Y=4833.435mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.596mil|Location2.X=1341.846mil|Location1.Y=4822.185mil|Location2.Y=4833.435mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.171mm &lt; 0.254mm) Between Pad R1_A-1(-9.111mm,17.156mm) on Top Layer And Pad D1-1(-7.587mm,16.064mm) on Top Layer [Top Solder] Mask Sliver [0.171mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1086.622mil|Location2.X=1100.255mil|Location1.Y=4364.594mil|Location2.Y=4375.844mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1086.622mil|Location2.X=1100.255mil|Location1.Y=4364.594mil|Location2.Y=4375.844mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.136mm &lt; 0.254mm) Between Via (-14.732mm,4.089mm) from Top Layer to Bottom Layer And Pad R2_A-1(-13.843mm,5.346mm) on Top Layer [Top Solder] Mask Sliver [0.136mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1163.029mil|Location2.X=1174.279mil|Location1.Y=4066.375mil|Location2.Y=4077.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1163.029mil|Location2.X=1174.279mil|Location1.Y=4066.375mil|Location2.Y=4077.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.068mm &lt; 0.254mm) Between Via (-11.709mm,-2.743mm) from Top Layer to Bottom Layer And Pad R4-1(-12.966mm,-3.048mm) on Top Layer [Top Solder] Mask Sliver [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1516.515mil|Location2.X=1529.639mil|Location1.Y=4304.01mil|Location2.Y=4315.26mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1516.515mil|Location2.X=1529.639mil|Location1.Y=4304.01mil|Location2.Y=4315.26mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.247mm &lt; 0.254mm) Between Via (-3.073mm,4.039mm) from Top Layer to Bottom Layer And Pad SP485-1(-4.688mm,2.794mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.247mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1524.246mil|Location2.X=1535.496mil|Location1.Y=4175.294mil|Location2.Y=4187.725mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1524.246mil|Location2.X=1535.496mil|Location1.Y=4175.294mil|Location2.Y=4187.725mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Via (-2.565mm,-0.33mm) from Top Layer to Bottom Layer And Pad SP485-3(-4.688mm,0.254mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1524.416mil|Location2.X=1535.666mil|Location1.Y=4143.363mil|Location2.Y=4156.38mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1524.416mil|Location2.X=1535.666mil|Location1.Y=4143.363mil|Location2.Y=4156.38mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.214mm &lt; 0.254mm) Between Via (-2.565mm,-0.33mm) from Top Layer to Bottom Layer And Pad SP485-4(-4.688mm,-1.016mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.214mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1319.782mil|Location2.X=1332.775mil|Location1.Y=4115.59mil|Location2.Y=4126.84mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1319.782mil|Location2.X=1332.775mil|Location1.Y=4115.59mil|Location2.Y=4126.84mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.123mm &lt; 0.254mm) Between Via (-8.204mm,-2.235mm) from Top Layer to Bottom Layer And Pad SP485-5(-9.588mm,-1.016mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.123mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1090.375mil|Location2.X=1102.288mil|Location1.Y=4309.875mil|Location2.Y=4321.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1090.375mil|Location2.X=1102.288mil|Location1.Y=4309.875mil|Location2.Y=4321.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.056mm &lt; 0.254mm) Between Via (-13.919mm,2.794mm) from Top Layer to Bottom Layer And Via (-14.732mm,4.089mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.056mm] / [Bottom Solder] Mask Sliver [0.056mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDNFJFGCWIJCSHEVLG15RCBYXSJMBYR5XXID2JRDF3JEXWGT4CYC2C"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1628.501mil|Location2.X=1636.168mil|Location1.Y=4260.89mil|Location2.Y=4268.557mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1628.501mil|Location2.X=1636.168mil|Location1.Y=4260.89mil|Location2.Y=4268.557mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (-0.762mm,1.905mm) on Top Overlay And Pad HDR3-1(-0.508mm,3.048mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1310.753mil|Location2.X=1322.003mil|Location1.Y=4002.249mil|Location2.Y=4013.499mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1310.753mil|Location2.X=1322.003mil|Location1.Y=4002.249mil|Location2.Y=4013.499mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-8.728mm,-4.572mm)(-7.528mm,-4.572mm) on Top Overlay And Pad R1-2(-8.128mm,-3.672mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1310.753mil|Location2.X=1322.003mil|Location1.Y=3986.501mil|Location2.Y=3997.751mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1310.753mil|Location2.X=1322.003mil|Location1.Y=3986.501mil|Location2.Y=3997.751mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-8.728mm,-4.572mm)(-7.528mm,-4.572mm) on Top Overlay And Pad R1-1(-8.128mm,-5.472mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1252.682mil|Location2.X=1263.932mil|Location1.Y=4510.753mil|Location2.Y=4522.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1252.682mil|Location2.X=1263.932mil|Location1.Y=4510.753mil|Location2.Y=4522.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-10.403mm,8.544mm)(-10.403mm,9.744mm) on Top Overlay And Pad C1-2(-9.503mm,9.144mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1236.935mil|Location2.X=1248.185mil|Location1.Y=4510.753mil|Location2.Y=4522.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1236.935mil|Location2.X=1248.185mil|Location1.Y=4510.753mil|Location2.Y=4522.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-10.403mm,8.544mm)(-10.403mm,9.744mm) on Top Overlay And Pad C1-1(-11.303mm,9.144mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1187.545mil|Location2.X=1195.211mil|Location1.Y=4508.608mil|Location2.Y=4516.274mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1187.545mil|Location2.X=1195.211mil|Location1.Y=4508.608mil|Location2.Y=4516.274mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "U1" (-12.04mm,8.357mm) on Top Overlay And Pad C1-1(-11.303mm,9.144mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1272.053mil|Location2.X=1283.303mil|Location1.Y=4806.501mil|Location2.Y=4817.751mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1272.053mil|Location2.X=1283.303mil|Location1.Y=4806.501mil|Location2.Y=4817.751mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-9.711mm,16.256mm)(-8.511mm,16.256mm) on Top Overlay And Pad R1_A-2(-9.111mm,15.356mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1272.053mil|Location2.X=1283.303mil|Location1.Y=4822.248mil|Location2.Y=4833.498mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1272.053mil|Location2.X=1283.303mil|Location1.Y=4822.248mil|Location2.Y=4833.498mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-9.711mm,16.256mm)(-8.511mm,16.256mm) on Top Overlay And Pad R1_A-1(-9.111mm,17.156mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1421.935mil|Location2.X=1433.185mil|Location1.Y=4728.469mil|Location2.Y=4739.719mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1421.935mil|Location2.X=1433.185mil|Location1.Y=4728.469mil|Location2.Y=4739.719mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-5.904mm,14.224mm)(-5.904mm,14.624mm) on Top Overlay And Pad R2-2(-6.254mm,13.674mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1394.375mil|Location2.X=1405.625mil|Location1.Y=4728.469mil|Location2.Y=4739.719mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1394.375mil|Location2.X=1405.625mil|Location1.Y=4728.469mil|Location2.Y=4739.719mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-6.604mm,14.224mm)(-6.604mm,14.624mm) on Top Overlay And Pad R2-2(-6.254mm,13.674mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1421.935mil|Location2.X=1433.185mil|Location1.Y=4756.029mil|Location2.Y=4767.279mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1421.935mil|Location2.X=1433.185mil|Location1.Y=4756.029mil|Location2.Y=4767.279mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-5.904mm,14.224mm)(-5.904mm,14.624mm) on Top Overlay And Pad R2-1(-6.254mm,15.174mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1394.375mil|Location2.X=1405.625mil|Location1.Y=4756.029mil|Location2.Y=4767.279mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1394.375mil|Location2.X=1405.625mil|Location1.Y=4756.029mil|Location2.Y=4767.279mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-6.604mm,14.224mm)(-6.604mm,14.624mm) on Top Overlay And Pad R2-1(-6.254mm,15.174mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1095.595mil|Location2.X=1106.845mil|Location1.Y=4428.155mil|Location2.Y=4439.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1095.595mil|Location2.X=1106.845mil|Location1.Y=4428.155mil|Location2.Y=4439.405mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-14.193mm,5.896mm)(-14.193mm,6.296mm) on Top Overlay And Pad R2_A-2(-13.843mm,6.846mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1123.155mil|Location2.X=1134.405mil|Location1.Y=4428.155mil|Location2.Y=4439.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1123.155mil|Location2.X=1134.405mil|Location1.Y=4428.155mil|Location2.Y=4439.405mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-13.493mm,5.896mm)(-13.493mm,6.296mm) on Top Overlay And Pad R2_A-2(-13.843mm,6.846mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1095.595mil|Location2.X=1106.845mil|Location1.Y=4400.595mil|Location2.Y=4411.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1095.595mil|Location2.X=1106.845mil|Location1.Y=4400.595mil|Location2.Y=4411.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-14.193mm,5.896mm)(-14.193mm,6.296mm) on Top Overlay And Pad R2_A-1(-13.843mm,5.346mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1123.155mil|Location2.X=1134.405mil|Location1.Y=4400.595mil|Location2.Y=4411.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1123.155mil|Location2.X=1134.405mil|Location1.Y=4400.595mil|Location2.Y=4411.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-13.493mm,5.896mm)(-13.493mm,6.296mm) on Top Overlay And Pad R2_A-1(-13.843mm,5.346mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1454.375mil|Location2.X=1465.625mil|Location1.Y=4756.029mil|Location2.Y=4767.279mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1454.375mil|Location2.X=1465.625mil|Location1.Y=4756.029mil|Location2.Y=4767.279mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-5.08mm,14.224mm)(-5.08mm,14.624mm) on Top Overlay And Pad R3-2(-4.73mm,15.174mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1481.935mil|Location2.X=1493.185mil|Location1.Y=4756.029mil|Location2.Y=4767.279mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1481.935mil|Location2.X=1493.185mil|Location1.Y=4756.029mil|Location2.Y=4767.279mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-4.38mm,14.224mm)(-4.38mm,14.624mm) on Top Overlay And Pad R3-2(-4.73mm,15.174mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1454.375mil|Location2.X=1465.625mil|Location1.Y=4728.469mil|Location2.Y=4739.719mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1454.375mil|Location2.X=1465.625mil|Location1.Y=4728.469mil|Location2.Y=4739.719mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-5.08mm,14.224mm)(-5.08mm,14.624mm) on Top Overlay And Pad R3-1(-4.73mm,13.674mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1481.935mil|Location2.X=1493.185mil|Location1.Y=4728.469mil|Location2.Y=4739.719mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1481.935mil|Location2.X=1493.185mil|Location1.Y=4728.469mil|Location2.Y=4739.719mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-4.38mm,14.224mm)(-4.38mm,14.624mm) on Top Overlay And Pad R3-1(-4.73mm,13.674mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1100.595mil|Location2.X=1111.845mil|Location1.Y=4040.595mil|Location2.Y=4051.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1100.595mil|Location2.X=1111.845mil|Location1.Y=4040.595mil|Location2.Y=4051.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-13.916mm,-3.398mm)(-13.516mm,-3.398mm) on Top Overlay And Pad R4-2(-14.466mm,-3.048mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1100.595mil|Location2.X=1111.845mil|Location1.Y=4068.155mil|Location2.Y=4079.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1100.595mil|Location2.X=1111.845mil|Location1.Y=4068.155mil|Location2.Y=4079.405mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-13.916mm,-2.698mm)(-13.516mm,-2.698mm) on Top Overlay And Pad R4-2(-14.466mm,-3.048mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1128.155mil|Location2.X=1139.405mil|Location1.Y=4040.595mil|Location2.Y=4051.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1128.155mil|Location2.X=1139.405mil|Location1.Y=4040.595mil|Location2.Y=4051.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-13.916mm,-3.398mm)(-13.516mm,-3.398mm) on Top Overlay And Pad R4-1(-12.966mm,-3.048mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1128.155mil|Location2.X=1139.405mil|Location1.Y=4068.155mil|Location2.Y=4079.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1128.155mil|Location2.X=1139.405mil|Location1.Y=4068.155mil|Location2.Y=4079.405mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-13.916mm,-2.698mm)(-13.516mm,-2.698mm) on Top Overlay And Pad R4-1(-12.966mm,-3.048mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1080.595mil|Location2.X=1091.845mil|Location1.Y=4157.683mil|Location2.Y=4168.933mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1080.595mil|Location2.X=1091.845mil|Location1.Y=4157.683mil|Location2.Y=4168.933mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-14.574mm,-0.974mm)(-14.574mm,-0.574mm) on Top Overlay And Pad R5-2(-14.224mm,-0.024mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1108.155mil|Location2.X=1119.405mil|Location1.Y=4157.683mil|Location2.Y=4168.933mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1108.155mil|Location2.X=1119.405mil|Location1.Y=4157.683mil|Location2.Y=4168.933mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-13.874mm,-0.974mm)(-13.874mm,-0.574mm) on Top Overlay And Pad R5-2(-14.224mm,-0.024mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1090.392mil|Location2.X=1098.058mil|Location1.Y=4108.107mil|Location2.Y=4115.774mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1090.392mil|Location2.X=1098.058mil|Location1.Y=4108.107mil|Location2.Y=4115.774mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R4" (-14.834mm,-1.803mm) on Top Overlay And Pad R5-1(-14.224mm,-1.524mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1080.595mil|Location2.X=1091.845mil|Location1.Y=4130.123mil|Location2.Y=4141.373mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1080.595mil|Location2.X=1091.845mil|Location1.Y=4130.123mil|Location2.Y=4141.373mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-14.574mm,-0.974mm)(-14.574mm,-0.574mm) on Top Overlay And Pad R5-1(-14.224mm,-1.524mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1108.155mil|Location2.X=1119.405mil|Location1.Y=4130.123mil|Location2.Y=4141.373mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1108.155mil|Location2.X=1119.405mil|Location1.Y=4130.123mil|Location2.Y=4141.373mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-13.874mm,-0.974mm)(-13.874mm,-0.574mm) on Top Overlay And Pad R5-1(-14.224mm,-1.524mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1467.129mil|Location2.X=1478.379mil|Location1.Y=4864.373mil|Location2.Y=4875.623mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1467.129mil|Location2.X=1478.379mil|Location1.Y=4864.373mil|Location2.Y=4875.623mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-4.953mm,15.875mm)(-4.953mm,21.971mm) on Bottom Overlay And Pad HDR5-1(-3.683mm,17.526mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1467.129mil|Location2.X=1478.379mil|Location1.Y=4964.373mil|Location2.Y=4975.623mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1467.129mil|Location2.X=1478.379mil|Location1.Y=4964.373mil|Location2.Y=4975.623mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-4.953mm,15.875mm)(-4.953mm,21.971mm) on Bottom Overlay And Pad HDR5-2(-3.683mm,20.066mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1634.375mil|Location2.X=1645.625mil|Location1.Y=4672.129mil|Location2.Y=4683.379mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1634.375mil|Location2.X=1645.625mil|Location1.Y=4672.129mil|Location2.Y=4683.379mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,12.446mm)(8.509mm,12.446mm) on Top Overlay And Pad HDR2-1(-0.508mm,13.716mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1734.375mil|Location2.X=1745.625mil|Location1.Y=4672.129mil|Location2.Y=4683.379mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1734.375mil|Location2.X=1745.625mil|Location1.Y=4672.129mil|Location2.Y=4683.379mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,12.446mm)(8.509mm,12.446mm) on Top Overlay And Pad HDR2-2(2.032mm,13.716mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1834.375mil|Location2.X=1845.625mil|Location1.Y=4672.129mil|Location2.Y=4683.379mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1834.375mil|Location2.X=1845.625mil|Location1.Y=4672.129mil|Location2.Y=4683.379mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,12.446mm)(8.509mm,12.446mm) on Top Overlay And Pad HDR2-3(4.572mm,13.716mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1934.375mil|Location2.X=1945.625mil|Location1.Y=4672.129mil|Location2.Y=4683.379mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1934.375mil|Location2.X=1945.625mil|Location1.Y=4672.129mil|Location2.Y=4683.379mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,12.446mm)(8.509mm,12.446mm) on Top Overlay And Pad HDR2-4(7.112mm,13.716mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1634.375mil|Location2.X=1645.625mil|Location1.Y=4336.621mil|Location2.Y=4347.871mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1634.375mil|Location2.X=1645.625mil|Location1.Y=4336.621mil|Location2.Y=4347.871mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,4.318mm)(8.509mm,4.318mm) on Bottom Overlay And Pad HDR3-1(-0.508mm,3.048mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1734.375mil|Location2.X=1745.625mil|Location1.Y=4336.621mil|Location2.Y=4347.871mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1734.375mil|Location2.X=1745.625mil|Location1.Y=4336.621mil|Location2.Y=4347.871mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,4.318mm)(8.509mm,4.318mm) on Bottom Overlay And Pad HDR3-2(2.032mm,3.048mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1834.375mil|Location2.X=1845.625mil|Location1.Y=4336.621mil|Location2.Y=4347.871mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1834.375mil|Location2.X=1845.625mil|Location1.Y=4336.621mil|Location2.Y=4347.871mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,4.318mm)(8.509mm,4.318mm) on Bottom Overlay And Pad HDR3-3(4.572mm,3.048mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1934.375mil|Location2.X=1945.625mil|Location1.Y=4336.621mil|Location2.Y=4347.871mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1934.375mil|Location2.X=1945.625mil|Location1.Y=4336.621mil|Location2.Y=4347.871mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,4.318mm)(8.509mm,4.318mm) on Bottom Overlay And Pad HDR3-4(7.112mm,3.048mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1472.129mil|Location2.X=1483.379mil|Location1.Y=4454.375mil|Location2.Y=4465.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1472.129mil|Location2.X=1483.379mil|Location1.Y=4454.375mil|Location2.Y=4465.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-4.826mm,5.461mm)(-4.826mm,11.557mm) on Bottom Overlay And Pad HDR4-1(-3.556mm,7.112mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1472.129mil|Location2.X=1483.379mil|Location1.Y=4554.375mil|Location2.Y=4565.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1472.129mil|Location2.X=1483.379mil|Location1.Y=4554.375mil|Location2.Y=4565.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-4.826mm,5.461mm)(-4.826mm,11.557mm) on Bottom Overlay And Pad HDR4-2(-3.556mm,9.652mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1361.935mil|Location2.X=1373.185mil|Location1.Y=4970.753mil|Location2.Y=4982.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1361.935mil|Location2.X=1373.185mil|Location1.Y=4970.753mil|Location2.Y=4982.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-7.228mm,20.228mm)(-7.228mm,21.428mm) on Bottom Overlay And Pad C2-2(-8.128mm,20.828mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1377.682mil|Location2.X=1388.932mil|Location1.Y=4970.753mil|Location2.Y=4982.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1377.682mil|Location2.X=1388.932mil|Location1.Y=4970.753mil|Location2.Y=4982.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-7.228mm,20.228mm)(-7.228mm,21.428mm) on Bottom Overlay And Pad C2-1(-6.328mm,20.828mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1404.175mil|Location2.X=1411.841mil|Location1.Y=4969.151mil|Location2.Y=4976.817mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1404.175mil|Location2.X=1411.841mil|Location1.Y=4969.151mil|Location2.Y=4976.817mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "VR1" (-5.766mm,20.193mm) on Bottom Overlay And Pad C2-1(-6.328mm,20.828mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1351.069mil|Location2.X=1362.319mil|Location1.Y=4570.753mil|Location2.Y=4582.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1351.069mil|Location2.X=1362.319mil|Location1.Y=4570.753mil|Location2.Y=4582.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-7.504mm,10.068mm)(-7.504mm,11.268mm) on Bottom Overlay And Pad C3-2(-8.404mm,10.668mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1366.816mil|Location2.X=1378.066mil|Location1.Y=4570.753mil|Location2.Y=4582.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1366.816mil|Location2.X=1378.066mil|Location1.Y=4570.753mil|Location2.Y=4582.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-7.504mm,10.068mm)(-7.504mm,11.268mm) on Bottom Overlay And Pad C3-1(-6.604mm,10.668mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1322.249mil|Location2.X=1333.499mil|Location1.Y=4330.753mil|Location2.Y=4342.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1322.249mil|Location2.X=1333.499mil|Location1.Y=4330.753mil|Location2.Y=4342.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-8.636mm,3.972mm)(-8.636mm,5.172mm) on Bottom Overlay And Pad C4-2(-7.736mm,4.572mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1306.502mil|Location2.X=1317.752mil|Location1.Y=4330.753mil|Location2.Y=4342.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1306.502mil|Location2.X=1317.752mil|Location1.Y=4330.753mil|Location2.Y=4342.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-8.636mm,3.972mm)(-8.636mm,5.172mm) on Bottom Overlay And Pad C4-1(-9.536mm,4.572mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1403.359mil|Location2.X=1414.609mil|Location1.Y=4666.997mil|Location2.Y=4678.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1403.359mil|Location2.X=1414.609mil|Location1.Y=4666.997mil|Location2.Y=4678.247mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.114mm &lt; 0.254mm) Between Text "C3" (-5.828mm,12.294mm) on Bottom Overlay And Pad VR1-1(-6.731mm,13.348mm) on Bottom Layer [Bottom Overlay] to [Bottom Solder] clearance [0.114mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDD4HRTF2XF54AOC2VPD23IDD00VB5XNNNQ3SP2DDDVHAMG453LFD"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1533.89mil|Location2.X=1545.14mil|Location1.Y=4370.73mil|Location2.Y=4381.98mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1533.89mil|Location2.X=1545.14mil|Location1.Y=4370.73mil|Location2.Y=4381.98mil|Absolute=True">Silk To Silk Clearance Constraint: (0.186mm &lt; 0.254mm) Between Text "SP485" (-3.023mm,4.572mm) on Bottom Overlay And Track (-3.048mm,5.207mm)(-3.048mm,5.715mm) on Bottom Overlay Silk Text to Silk Clearance [0.186mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1488.7mil|Location2.X=1499.95mil|Location1.Y=4370.726mil|Location2.Y=4381.976mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_voltageSensor\MABSS_voltageSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1488.7mil|Location2.X=1499.95mil|Location1.Y=4370.726mil|Location2.Y=4381.976mil|Absolute=True">Silk To Silk Clearance Constraint: (0.185mm &lt; 0.254mm) Between Text "SP485" (-3.023mm,4.572mm) on Bottom Overlay And Track (-4.572mm,5.207mm)(-3.048mm,5.207mm) on Bottom Overlay Silk Text to Silk Clearance [0.185mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

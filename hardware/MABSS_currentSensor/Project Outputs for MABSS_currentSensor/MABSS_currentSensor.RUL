@@ -1,0 +1,5 @@
+DRC Rules Export File for PCB: C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=0.00
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=7.09
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=6.89
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0

@@ -1,0 +1,30 @@
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : Project [MABSS_voltageSensor.PrjPcb]
+   Generated File[MABSS_voltageSensor_Copper_Signal_Top.gbr]
+   Generated File[MABSS_voltageSensor_Copper_Signal_Bot.gbr]
+   Generated File[MABSS_voltageSensor_Pads_Bot.gbr]
+   Generated File[MABSS_voltageSensor_Pads_Top.gbr]
+   Generated File[MABSS_voltageSensor_Legend_Top.gbr]
+   Generated File[MABSS_voltageSensor_Soldermask_Top.gbr]
+   Generated File[MABSS_voltageSensor_Paste_Bot.gbr]
+   Generated File[MABSS_voltageSensor_Legend_Bot.gbr]
+   Generated File[MABSS_voltageSensor_Soldermask_Bot.gbr]
+   Generated File[MABSS_voltageSensor_Paste_Top.gbr]
+   Generated File[MABSS_voltageSensor_Keep-out.gbr]
+   Generated File[MABSS_voltageSensor_Mechanical_13.gbr]
+   Generated File[MABSS_voltageSensor_Mechanical_15.gbr]
+   Generated File[MABSS_voltageSensor_Mechanical_1.gbr]
+   Generated File[MABSS_voltageSensor_Profile.gbr]
+   Generated File[MABSS_voltageSensor_PTH_Drill.gbr]
+   Generated File[MABSS_voltageSensor_Drawing_1.gbr]
+   Generated File[MABSS_voltageSensor_Drillmap_1.gbr]
+   Generated File[MABSS_voltageSensor.RUL]
+   Generated File[MABSS_voltageSensor.EXTREP]
+   Generated File[MABSS_voltageSensor.REP]
+
+
+Files Generated   : 21
+Documents Printed : 0
+
+Finished Output Generation At 10:58:29 On 23-1-2017

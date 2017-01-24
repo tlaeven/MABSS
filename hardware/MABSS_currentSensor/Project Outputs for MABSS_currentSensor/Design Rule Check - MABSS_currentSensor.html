@@ -1,0 +1,692 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD16\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">23-1-2017</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">08:10:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc" class="file"><acronym title="C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc">C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">12</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">100</td></tr>
+</table>
+</td>
+</table><a name="IDR4ONWL2EWPW2KWAMTIW3NHAGRDC3WLI0U2AWHJEKTLCNFFP2UUVE"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNI0JYVMO1LQN1FQBZCTOJ20LMNANZUOBAGR4XF44FYWL2KCPNMC">Unplated multi-layer pad(s) detected</a></td>
+<td class="column2">12</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">12</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFMQCEMME5V02BTUSRLUDBLBM1KOULCW0IOIXAFH4T3ZWAN4S32Z">SMD Neck-Down Constraint (Percent=90%) (All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIRUGZKMB3VBLMNPP11HA2JQ22NMQLRBSPRLYEMHGRVIF2BZU30PM">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYEW11KTNAAVTIMO5MJCBAWEKYLDAM0EX1MT25W0WEH001YXTMLF">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4I4TVZD1PHCDTHQEYNSKM2AEHL1Z4HCW30T0WMMYNAZ5OWJTWMI">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">21</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFQRKGXDVXIYIHGOZVHYD0RXUXBVTBMGHG5DIXYJFLC522M3KKBUG">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">64</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDERHLAX0PDKQYLSIQVJ0LLCHEYDDAKW3GWU0VKUJSSAK0I5W0DI3G">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZY4EJQAP0C5APQ2D4AEXTX4CCJZJUAKZUMH1DCGTP3B31UNFPP">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDUF0MD2UFJRAELL1JPQKYS0PBVVIFO1EFUK03KJPW11F0NVEW5CP">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDSTZUEXEDSO3TJS5ECSMKU1BRGMLGRRQIKIBXGNTR11KE0OLNE5F">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAIKSRE2SJ0IJNFCYMWS2PI1QTLIOHJ4MUROZ4QPED1J1PY4X1GOI">Width Constraint (Min=0.18mm) (Max=2mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYELPNV4PGLUAI1M4FOE212F4EIGXLAEYQOQLHYJC54HHY1TE0FON">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMUG1TFBGM1JANY1CX4WCWCYOPKAIZTIXOSII0YP0JVH0WK3JT2LD">Clearance Constraint (Gap=0.175mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFCDQOFPE4WCANJO51ANCXIF4DLLYMOW2M3SKREFIJKYIS0AP24WP">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">12</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOOEITTIEHEELFBDLYC1YCUJT4ECW434ISSHISGMBQCEUK0E5OAXF">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">100</td>
+</tr>
+</table><br><a name="IDVTQJPYQU1GVKCITJPBXHGKRE3GW0QJOY3VSVXVNFJBN2ONVVRHHO"><h2>Warnings</h2></a><a name="IDNI0JYVMO1LQN1FQBZCTOJ20LMNANZUOBAGR4XF44FYWL2KCPNMC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Unplated multi-layer pad(s) detected</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=770.63mil|Location2.X=849.37mil|Location1.Y=4520.63mil|Location2.Y=4599.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=770.63mil|Location2.X=849.37mil|Location1.Y=4520.63mil|Location2.Y=4599.37mil|Absolute=True">Pad -2(-21.59mm,9.652mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=653mil|Location2.X=1513.287mil|Location1.Y=4490mil|Location2.Y=5118.232mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=653mil|Location2.X=1513.287mil|Location1.Y=4490mil|Location2.Y=5118.232mil|Absolute=True">Net NetC6_1</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=670.63mil|Location2.X=749.37mil|Location1.Y=4520.63mil|Location2.Y=4599.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=670.63mil|Location2.X=749.37mil|Location1.Y=4520.63mil|Location2.Y=4599.37mil|Absolute=True">Pad -1(-24.13mm,9.652mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=670.63mil|Location2.X=790.51mil|Location1.Y=4520.63mil|Location2.Y=4835.117mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=670.63mil|Location2.X=790.51mil|Location1.Y=4520.63mil|Location2.Y=4835.117mil|Absolute=True">Net NetHDRvSense_1</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=705.591mil|Location1.Y=4052.008mil|Location2.Y=4103.189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=705.591mil|Location1.Y=4052.008mil|Location2.Y=4103.189mil|Absolute=True">Pad -ref(-24.892mm,-2.601mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=812.872mil|Location1.Y=4052.008mil|Location2.Y=4103.189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=812.872mil|Location1.Y=4052.008mil|Location2.Y=4103.189mil|Absolute=True">Net NetCurrent_sensor_ref</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=705.591mil|Location1.Y=4127.007mil|Location2.Y=4178.189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=705.591mil|Location1.Y=4127.007mil|Location2.Y=4178.189mil|Absolute=True">Pad -OUT(-24.892mm,-0.696mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=832.558mil|Location1.Y=4009mil|Location2.Y=4178.189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=832.558mil|Location1.Y=4009mil|Location2.Y=4178.189mil|Absolute=True">Net NetCurrent_sensor_OUT</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=705.591mil|Location1.Y=4202.007mil|Location2.Y=4253.189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=705.591mil|Location1.Y=4202.007mil|Location2.Y=4253.189mil|Absolute=True">Pad -GND(-24.892mm,1.209mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=637mil|Location2.X=1987mil|Location1.Y=3955mil|Location2.Y=5067.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=637mil|Location2.X=1987mil|Location1.Y=3955mil|Location2.Y=5067.559mil|Absolute=True">Net GND</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=705.591mil|Location1.Y=4277.007mil|Location2.Y=4328.189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=705.591mil|Location1.Y=4277.007mil|Location2.Y=4328.189mil|Absolute=True">Pad -+5V(-24.892mm,3.114mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=1768.19mil|Location1.Y=4025.749mil|Location2.Y=5084.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=654.409mil|Location2.X=1768.19mil|Location1.Y=4025.749mil|Location2.Y=5084.452mil|Absolute=True">Net +5V</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1019.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1019.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True">Pad -6(-17.272mm,-6.096mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True">Net NetCurrent_sensor_4</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1040.63mil|Location2.X=1119.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1040.63mil|Location2.X=1119.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True">Pad -5(-14.732mm,-6.096mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True">Net NetCurrent_sensor_4</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1140.63mil|Location2.X=1219.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1140.63mil|Location2.X=1219.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True">Pad -4(-12.192mm,-6.096mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=3900.63mil|Location2.Y=3979.37mil|Absolute=True">Net NetCurrent_sensor_4</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1140.63mil|Location2.X=1219.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1140.63mil|Location2.X=1219.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True">Pad -3(-12.192mm,6.604mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True">Net NetCurrent_sensor_1</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1040.63mil|Location2.X=1119.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1040.63mil|Location2.X=1119.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True">Pad -2(-14.732mm,6.604mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True">Net NetCurrent_sensor_1</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1019.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1019.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True">Pad -1(-17.272mm,6.604mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=940.63mil|Location2.X=1219.37mil|Location1.Y=4400.63mil|Location2.Y=4479.37mil|Absolute=True">Net NetCurrent_sensor_1</acronym></a></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDFMQCEMME5V02BTUSRLUDBLBM1KOULCW0IOIXAFH4T3ZWAN4S32Z"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">SMD Neck-Down Constraint (Percent=90%) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=800.372mil|Location2.X=855.696mil|Location1.Y=4067.62mil|Location2.Y=4084.094mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=800.372mil|Location2.X=855.696mil|Location1.Y=4067.62mil|Location2.Y=4084.094mil|Absolute=True">SMD Neck-Down Constraint: Between Pad U3-5(-21.644mm,-2.664mm) on Bottom Layer And Track (-23.254mm,-2.664mm)(-21.644mm,-2.664mm) on Bottom Layer Relative Track Width: 102%</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID4I4TVZD1PHCDTHQEYNSKM2AEHL1Z4HCW30T0WMMYNAZ5OWJTWMI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=720.735mil|Location2.X=728.401mil|Location1.Y=4406.671mil|Location2.Y=4414.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=720.735mil|Location2.X=728.401mil|Location1.Y=4406.671mil|Location2.Y=4414.337mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "Rref" (-25.51mm,6.792mm) on Bottom Overlay And Track (-23.76mm,5.242mm)(-23.76mm,6.442mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1185.301mil|Location2.X=1192.967mil|Location1.Y=4875.167mil|Location2.Y=4882.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1185.301mil|Location2.X=1192.967mil|Location1.Y=4875.167mil|Location2.Y=4882.833mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "VR1" (-10.127mm,17.755mm) on Bottom Overlay And Track (-11.96mm,15.534mm)(-11.96mm,20.534mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1256.167mil|Location2.X=1263.833mil|Location1.Y=4905.407mil|Location2.Y=4913.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1256.167mil|Location2.X=1263.833mil|Location1.Y=4905.407mil|Location2.Y=4913.074mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "VR1" (-10.127mm,17.755mm) on Bottom Overlay And Track (-10.16mm,15.534mm)(-10.16mm,20.534mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1827.979mil|Location2.X=1835.645mil|Location1.Y=4715.282mil|Location2.Y=4722.948mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1827.979mil|Location2.X=1835.645mil|Location1.Y=4715.282mil|Location2.Y=4722.948mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SP485" (5.131mm,13.335mm) on Bottom Overlay And Track (4.364mm,11.216mm)(4.364mm,16.216mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1764.987mil|Location2.X=1772.653mil|Location1.Y=4702.216mil|Location2.Y=4709.882mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1764.987mil|Location2.X=1772.653mil|Location1.Y=4702.216mil|Location2.Y=4709.882mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SP485" (5.131mm,13.335mm) on Bottom Overlay And Track (2.764mm,11.216mm)(2.764mm,16.216mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.167mil|Location2.X=1783.833mil|Location1.Y=4867.416mil|Location2.Y=4875.082mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.167mil|Location2.X=1783.833mil|Location1.Y=4867.416mil|Location2.Y=4875.082mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C4" (3.683mm,17.399mm) on Bottom Overlay And Track (3.048mm,17.18mm)(3.048mm,18.38mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1290.735mil|Location2.X=1298.401mil|Location1.Y=5026.804mil|Location2.Y=5034.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1290.735mil|Location2.X=1298.401mil|Location1.Y=5026.804mil|Location2.Y=5034.471mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C3" (-8.654mm,21.463mm) on Bottom Overlay And Track (-9.282mm,21.244mm)(-9.282mm,22.444mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1146.167mil|Location2.X=1153.833mil|Location1.Y=5029.033mil|Location2.Y=5036.699mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1146.167mil|Location2.X=1153.833mil|Location1.Y=5029.033mil|Location2.Y=5036.699mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C2" (-12.311mm,21.463mm) on Bottom Overlay And Track (-12.954mm,21.244mm)(-12.954mm,22.444mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1068.388mil|Location2.X=1076.054mil|Location1.Y=4181.167mil|Location2.Y=4188.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1068.388mil|Location2.X=1076.054mil|Location1.Y=4181.167mil|Location2.Y=4188.833mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C1" (-13.843mm,-0.254mm) on Bottom Overlay And Track (-15.002mm,0.127mm)(-13.802mm,0.127mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1736.167mil|Location2.X=1743.833mil|Location1.Y=4198.337mil|Location2.Y=4206.004mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1736.167mil|Location2.X=1743.833mil|Location1.Y=4198.337mil|Location2.Y=4206.004mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "HDR3" (1.905mm,1.016mm) on Bottom Overlay And Track (2.032mm,-2.286mm)(2.032mm,1.27mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1828.443mil|Location2.X=1839.693mil|Location1.Y=4217.137mil|Location2.Y=4228.387mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1828.443mil|Location2.X=1839.693mil|Location1.Y=4217.137mil|Location2.Y=4228.387mil|Absolute=True">Silk To Silk Clearance Constraint: (0.114mm &lt; 0.254mm) Between Text "HDR3" (1.905mm,1.016mm) on Bottom Overlay And Track (2.032mm,1.27mm)(4.572mm,1.27mm) on Bottom Overlay Silk Text to Silk Clearance [0.114mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1836.167mil|Location2.X=1843.833mil|Location1.Y=4187.631mil|Location2.Y=4195.297mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1836.167mil|Location2.X=1843.833mil|Location1.Y=4187.631mil|Location2.Y=4195.297mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "HDR3" (1.905mm,1.016mm) on Bottom Overlay And Track (4.572mm,-2.286mm)(4.572mm,1.27mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1597.6mil|Location2.X=1605.266mil|Location1.Y=3995.167mil|Location2.Y=4002.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1597.6mil|Location2.X=1605.266mil|Location1.Y=3995.167mil|Location2.Y=4002.833mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R2_A" (-4.089mm,-4.597mm) on Top Overlay And Track (-1.397mm,-6.35mm)(-1.397mm,1.27mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1080.71mil|Location2.X=1088.377mil|Location1.Y=4633.845mil|Location2.Y=4641.511mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1080.71mil|Location2.X=1088.377mil|Location1.Y=4633.845mil|Location2.Y=4641.511mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R1_A" (-15.664mm,11.354mm) on Top Overlay And Track (-14.961mm,11.625mm)(-13.761mm,11.625mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1736.167mil|Location2.X=1743.833mil|Location1.Y=4790.413mil|Location2.Y=4798.079mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1736.167mil|Location2.X=1743.833mil|Location1.Y=4790.413mil|Location2.Y=4798.079mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "HDR2" (1.905mm,15.24mm) on Top Overlay And Track (2.032mm,14.986mm)(2.032mm,18.542mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1759.746mil|Location2.X=1770.996mil|Location1.Y=4771.875mil|Location2.Y=4783.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1759.746mil|Location2.X=1770.996mil|Location1.Y=4771.875mil|Location2.Y=4783.125mil|Absolute=True">Silk To Silk Clearance Constraint: (0.127mm &lt; 0.254mm) Between Text "HDR2" (1.905mm,15.24mm) on Top Overlay And Track (2.032mm,14.986mm)(4.572mm,14.986mm) on Top Overlay Silk Text to Silk Clearance [0.127mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1836.167mil|Location2.X=1843.833mil|Location1.Y=4776.997mil|Location2.Y=4784.664mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1836.167mil|Location2.X=1843.833mil|Location1.Y=4776.997mil|Location2.Y=4784.664mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "HDR2" (1.905mm,15.24mm) on Top Overlay And Track (4.572mm,14.986mm)(4.572mm,18.542mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1558.155mil|Location2.X=1569.405mil|Location1.Y=3990.107mil|Location2.Y=4001.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1558.155mil|Location2.X=1569.405mil|Location1.Y=3990.107mil|Location2.Y=4001.357mil|Absolute=True">Silk To Silk Clearance Constraint: (0.125mm &lt; 0.254mm) Between Text "R2_A" (-4.089mm,-4.597mm) on Top Overlay And Track (-2.444mm,-4.518mm)(-2.444mm,-4.118mm) on Top Overlay Silk Text to Silk Clearance [0.125mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1532.387mil|Location2.X=1540.053mil|Location1.Y=3998.293mil|Location2.Y=4005.959mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1532.387mil|Location2.X=1540.053mil|Location1.Y=3998.293mil|Location2.Y=4005.959mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R2_A" (-4.089mm,-4.597mm) on Top Overlay And Track (-3.144mm,-4.518mm)(-3.144mm,-4.118mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=652.646mil|Location2.X=660.313mil|Location1.Y=4778.124mil|Location2.Y=4785.791mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=652.646mil|Location2.X=660.313mil|Location1.Y=4778.124mil|Location2.Y=4785.791mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "Vdiv_2" (-24.592mm,18.721mm) on Bottom Overlay And Text "Vdiv_1" (-24.592mm,16.689mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1134.193mil|Location2.X=1141.86mil|Location1.Y=4638.56mil|Location2.Y=4646.227mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1134.193mil|Location2.X=1141.86mil|Location1.Y=4638.56mil|Location2.Y=4646.227mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "D1" (-13.378mm,11.735mm) on Top Overlay And Text "R1_A" (-15.664mm,11.354mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDFQRKGXDVXIYIHGOZVHYD0RXUXBVTBMGHG5DIXYJFLC522M3KKBUG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=919.766mil|Location2.X=927.433mil|Location1.Y=4073.749mil|Location2.Y=4081.416mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=919.766mil|Location2.X=927.433mil|Location1.Y=4073.749mil|Location2.Y=4081.416mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (-18.957mm,-2.601mm) on Bottom Overlay And Pad C8-1(-18.288mm,-2.478mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1496.836mil|Location2.X=1508.086mil|Location1.Y=4914.07mil|Location2.Y=4925.32mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1496.836mil|Location2.X=1508.086mil|Location1.Y=4914.07mil|Location2.Y=4925.32mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Arc (-4.002mm,19.141mm) on Bottom Overlay And Pad C7-1(-4.064mm,18.288mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1313.431mil|Location2.X=1324.681mil|Location1.Y=5004.749mil|Location2.Y=5015.999mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1313.431mil|Location2.X=1324.681mil|Location1.Y=5004.749mil|Location2.Y=5015.999mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.105mm &lt; 0.254mm) Between Arc (-8.66mm,20.789mm) on Bottom Overlay And Pad C3-1(-8.382mm,21.844mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.105mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=711.068mil|Location2.X=722.318mil|Location1.Y=4380.753mil|Location2.Y=4392.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=711.068mil|Location2.X=722.318mil|Location1.Y=4380.753mil|Location2.Y=4392.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-23.76mm,5.242mm)(-23.76mm,6.442mm) on Bottom Overlay And Pad Rref-2(-24.66mm,5.842mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=679.278mil|Location2.X=686.945mil|Location1.Y=4392.513mil|Location2.Y=4400.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=679.278mil|Location2.X=686.945mil|Location1.Y=4392.513mil|Location2.Y=4400.18mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "Rref" (-25.51mm,6.792mm) on Bottom Overlay And Pad Rref-2(-24.66mm,5.842mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=726.817mil|Location2.X=738.067mil|Location1.Y=4380.753mil|Location2.Y=4392.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=726.817mil|Location2.X=738.067mil|Location1.Y=4380.753mil|Location2.Y=4392.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-23.76mm,5.242mm)(-23.76mm,6.442mm) on Bottom Overlay And Pad Rref-1(-22.86mm,5.842mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=754.166mil|Location2.X=761.832mil|Location1.Y=4406.671mil|Location2.Y=4414.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=754.166mil|Location2.X=761.832mil|Location1.Y=4406.671mil|Location2.Y=4414.337mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "Rref" (-25.51mm,6.792mm) on Bottom Overlay And Pad Rref-1(-22.86mm,5.842mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1277.77mil|Location2.X=1285.437mil|Location1.Y=4800.85mil|Location2.Y=4808.516mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1277.77mil|Location2.X=1285.437mil|Location1.Y=4800.85mil|Location2.Y=4808.516mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "U2" (-7.517mm,15.964mm) on Bottom Overlay And Pad VR1-4(-8.66mm,16.129mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1304.92mil|Location2.X=1312.587mil|Location1.Y=4850.85mil|Location2.Y=4858.516mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1304.92mil|Location2.X=1312.587mil|Location1.Y=4850.85mil|Location2.Y=4858.516mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "U2" (-7.517mm,15.964mm) on Bottom Overlay And Pad VR1-3(-8.66mm,17.399mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1853.622mil|Location2.X=1861.289mil|Location1.Y=4729.965mil|Location2.Y=4737.632mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1853.622mil|Location2.X=1861.289mil|Location1.Y=4729.965mil|Location2.Y=4737.632mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SP485" (5.131mm,13.335mm) on Bottom Overlay And Pad SP485-2(6.014mm,14.351mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1852.058mil|Location2.X=1859.725mil|Location1.Y=4701.779mil|Location2.Y=4709.445mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1852.058mil|Location2.X=1859.725mil|Location1.Y=4701.779mil|Location2.Y=4709.445mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SP485" (5.131mm,13.335mm) on Bottom Overlay And Pad SP485-3(6.014mm,13.081mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1742.407mil|Location2.X=1750.073mil|Location1.Y=4729.13mil|Location2.Y=4736.797mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1742.407mil|Location2.X=1750.073mil|Location1.Y=4729.13mil|Location2.Y=4736.797mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SP485" (5.131mm,13.335mm) on Bottom Overlay And Pad SP485-7(1.114mm,14.351mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1738.909mil|Location2.X=1746.576mil|Location1.Y=4702.827mil|Location2.Y=4710.494mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1738.909mil|Location2.X=1746.576mil|Location1.Y=4702.827mil|Location2.Y=4710.494mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SP485" (5.131mm,13.335mm) on Bottom Overlay And Pad SP485-6(1.114mm,13.081mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1782.249mil|Location2.X=1793.499mil|Location1.Y=4850.753mil|Location2.Y=4862.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1782.249mil|Location2.X=1793.499mil|Location1.Y=4850.753mil|Location2.Y=4862.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (3.048mm,17.18mm)(3.048mm,18.38mm) on Bottom Overlay And Pad C4-2(3.948mm,17.78mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1795.224mil|Location2.X=1802.89mil|Location1.Y=4862.827mil|Location2.Y=4870.494mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1795.224mil|Location2.X=1802.89mil|Location1.Y=4862.827mil|Location2.Y=4870.494mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C4" (3.683mm,17.399mm) on Bottom Overlay And Pad C4-2(3.948mm,17.78mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1766.502mil|Location2.X=1777.752mil|Location1.Y=4850.753mil|Location2.Y=4862.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1766.502mil|Location2.X=1777.752mil|Location1.Y=4850.753mil|Location2.Y=4862.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (3.048mm,17.18mm)(3.048mm,18.38mm) on Bottom Overlay And Pad C4-1(2.148mm,17.78mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1755.413mil|Location2.X=1763.079mil|Location1.Y=4861.167mil|Location2.Y=4868.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1755.413mil|Location2.X=1763.079mil|Location1.Y=4861.167mil|Location2.Y=4868.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C4" (3.683mm,17.399mm) on Bottom Overlay And Pad C4-1(2.148mm,17.78mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1281.069mil|Location2.X=1292.319mil|Location1.Y=5010.753mil|Location2.Y=5022.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1281.069mil|Location2.X=1292.319mil|Location1.Y=5010.753mil|Location2.Y=5022.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-9.282mm,21.244mm)(-9.282mm,22.444mm) on Bottom Overlay And Pad C3-2(-10.182mm,21.844mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1266.167mil|Location2.X=1273.833mil|Location1.Y=5026.76mil|Location2.Y=5034.427mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1266.167mil|Location2.X=1273.833mil|Location1.Y=5026.76mil|Location2.Y=5034.427mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C3" (-8.654mm,21.463mm) on Bottom Overlay And Pad C3-2(-10.182mm,21.844mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1296.816mil|Location2.X=1308.066mil|Location1.Y=5010.753mil|Location2.Y=5022.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1296.816mil|Location2.X=1308.066mil|Location1.Y=5010.753mil|Location2.Y=5022.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-9.282mm,21.244mm)(-9.282mm,22.444mm) on Bottom Overlay And Pad C3-1(-8.382mm,21.844mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1303.239mil|Location2.X=1310.905mil|Location1.Y=5020.773mil|Location2.Y=5028.44mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1303.239mil|Location2.X=1310.905mil|Location1.Y=5020.773mil|Location2.Y=5028.44mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C3" (-8.654mm,21.463mm) on Bottom Overlay And Pad C3-1(-8.382mm,21.844mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1152.249mil|Location2.X=1163.499mil|Location1.Y=5010.753mil|Location2.Y=5022.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1152.249mil|Location2.X=1163.499mil|Location1.Y=5010.753mil|Location2.Y=5022.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-12.954mm,21.244mm)(-12.954mm,22.444mm) on Bottom Overlay And Pad C2-2(-12.054mm,21.844mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1164.843mil|Location2.X=1172.51mil|Location1.Y=5022.39mil|Location2.Y=5030.057mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1164.843mil|Location2.X=1172.51mil|Location1.Y=5022.39mil|Location2.Y=5030.057mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C2" (-12.311mm,21.463mm) on Bottom Overlay And Pad C2-2(-12.054mm,21.844mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1136.502mil|Location2.X=1147.752mil|Location1.Y=5010.753mil|Location2.Y=5022.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1136.502mil|Location2.X=1147.752mil|Location1.Y=5010.753mil|Location2.Y=5022.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-12.954mm,21.244mm)(-12.954mm,22.444mm) on Bottom Overlay And Pad C2-1(-13.854mm,21.844mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1127.687mil|Location2.X=1135.354mil|Location1.Y=5033.272mil|Location2.Y=5040.938mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1127.687mil|Location2.X=1135.354mil|Location1.Y=5033.272mil|Location2.Y=5040.938mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C2" (-12.311mm,21.463mm) on Bottom Overlay And Pad C2-1(-13.854mm,21.844mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1067.03mil|Location2.X=1074.696mil|Location1.Y=4166.167mil|Location2.Y=4173.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1067.03mil|Location2.X=1074.696mil|Location1.Y=4166.167mil|Location2.Y=4173.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C1" (-13.843mm,-0.254mm) on Bottom Overlay And Pad C1-2(-14.402mm,-0.773mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1063.753mil|Location2.X=1075.003mil|Location1.Y=4171.502mil|Location2.Y=4182.752mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1063.753mil|Location2.X=1075.003mil|Location1.Y=4171.502mil|Location2.Y=4182.752mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-15.002mm,0.127mm)(-13.802mm,0.127mm) on Bottom Overlay And Pad C1-2(-14.402mm,-0.773mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1067.03mil|Location2.X=1074.696mil|Location1.Y=4193.261mil|Location2.Y=4200.927mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1067.03mil|Location2.X=1074.696mil|Location1.Y=4193.261mil|Location2.Y=4200.927mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C1" (-13.843mm,-0.254mm) on Bottom Overlay And Pad C1-1(-14.402mm,1.027mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1063.753mil|Location2.X=1075.003mil|Location1.Y=4187.249mil|Location2.Y=4198.499mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1063.753mil|Location2.X=1075.003mil|Location1.Y=4187.249mil|Location2.Y=4198.499mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-15.002mm,0.127mm)(-13.802mm,0.127mm) on Bottom Overlay And Pad C1-1(-14.402mm,1.027mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=766.17mil|Location2.X=777.42mil|Location1.Y=4302.247mil|Location2.Y=4313.497mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=766.17mil|Location2.X=777.42mil|Location1.Y=4302.247mil|Location2.Y=4313.497mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.207mm &lt; 0.254mm) Between Text "C5" (-20.32mm,3.048mm) on Bottom Overlay And Pad C5-2(-23.114mm,3.494mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.207mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=804.571mil|Location2.X=815.821mil|Location1.Y=4778.311mil|Location2.Y=4789.561mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=804.571mil|Location2.X=815.821mil|Location1.Y=4778.311mil|Location2.Y=4789.561mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-21.785mm,15.34mm)(-21.785mm,16.54mm) on Bottom Overlay And Pad Vdiv_1-1(-20.885mm,15.94mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=788.822mil|Location2.X=800.072mil|Location1.Y=4778.311mil|Location2.Y=4789.561mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=788.822mil|Location2.X=800.072mil|Location1.Y=4778.311mil|Location2.Y=4789.561mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-21.785mm,15.34mm)(-21.785mm,16.54mm) on Bottom Overlay And Pad Vdiv_1-2(-22.685mm,15.94mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=804.571mil|Location2.X=815.821mil|Location1.Y=4858.311mil|Location2.Y=4869.561mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=804.571mil|Location2.X=815.821mil|Location1.Y=4858.311mil|Location2.Y=4869.561mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-21.785mm,17.372mm)(-21.785mm,18.572mm) on Bottom Overlay And Pad Vdiv_2-1(-20.885mm,17.972mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=788.822mil|Location2.X=800.072mil|Location1.Y=4858.311mil|Location2.Y=4869.561mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=788.822mil|Location2.X=800.072mil|Location1.Y=4858.311mil|Location2.Y=4869.561mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-21.785mm,17.372mm)(-21.785mm,18.572mm) on Bottom Overlay And Pad Vdiv_2-2(-22.685mm,17.972mm) on Bottom Layer [Bottom Overlay] to [Solder Side] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=804.375mil|Location2.X=815.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=804.375mil|Location2.X=815.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-25.781mm,8.382mm)(-19.685mm,8.382mm) on Top Overlay And Pad -2(-21.59mm,9.652mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=687.989mil|Location2.X=695.655mil|Location1.Y=4583.797mil|Location2.Y=4591.464mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=687.989mil|Location2.X=695.655mil|Location1.Y=4583.797mil|Location2.Y=4591.464mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "Vdiv_1" (-24.592mm,16.689mm) on Bottom Overlay And Pad -1(-24.13mm,9.652mm) on Multi-Layer [Bottom Overlay] to [Solder Side] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=704.375mil|Location2.X=715.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=704.375mil|Location2.X=715.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-25.781mm,8.382mm)(-19.685mm,8.382mm) on Top Overlay And Pad -1(-24.13mm,9.652mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=703.073mil|Location2.X=714.323mil|Location1.Y=4077.027mil|Location2.Y=4088.277mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=703.073mil|Location2.X=714.323mil|Location1.Y=4077.027mil|Location2.Y=4088.277mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.176mm &lt; 0.254mm) Between Text "U3" (-23.938mm,-2.664mm) on Bottom Overlay And Pad -ref(-24.892mm,-2.601mm) on Multi-Layer [Bottom Overlay] to [Solder Side] clearance [0.176mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=703.058mil|Location2.X=714.308mil|Location1.Y=4141.147mil|Location2.Y=4152.397mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=703.058mil|Location2.X=714.308mil|Location1.Y=4141.147mil|Location2.Y=4152.397mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.181mm &lt; 0.254mm) Between Text "U3" (-23.938mm,-2.664mm) on Bottom Overlay And Pad -OUT(-24.892mm,-0.696mm) on Multi-Layer [Bottom Overlay] to [Solder Side] clearance [0.181mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1634.375mil|Location2.X=1645.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1634.375mil|Location2.X=1645.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,8.382mm)(8.509mm,8.382mm) on Top Overlay And Pad HDR2-1(-0.508mm,9.652mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1734.375mil|Location2.X=1745.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1734.375mil|Location2.X=1745.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,8.382mm)(8.509mm,8.382mm) on Top Overlay And Pad HDR2-2(2.032mm,9.652mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1834.375mil|Location2.X=1845.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1834.375mil|Location2.X=1845.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,8.382mm)(8.509mm,8.382mm) on Top Overlay And Pad HDR2-3(4.572mm,9.652mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1934.375mil|Location2.X=1945.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1934.375mil|Location2.X=1945.625mil|Location1.Y=4512.129mil|Location2.Y=4523.379mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,8.382mm)(8.509mm,8.382mm) on Top Overlay And Pad HDR2-4(7.112mm,9.652mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1634.375mil|Location2.X=1645.625mil|Location1.Y=4476.621mil|Location2.Y=4487.871mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1634.375mil|Location2.X=1645.625mil|Location1.Y=4476.621mil|Location2.Y=4487.871mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,7.874mm)(8.509mm,7.874mm) on Bottom Overlay And Pad HDR3-1(-0.508mm,6.604mm) on Multi-Layer [Bottom Overlay] to [Solder Side] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1734.375mil|Location2.X=1745.625mil|Location1.Y=4476.621mil|Location2.Y=4487.871mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1734.375mil|Location2.X=1745.625mil|Location1.Y=4476.621mil|Location2.Y=4487.871mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,7.874mm)(8.509mm,7.874mm) on Bottom Overlay And Pad HDR3-2(2.032mm,6.604mm) on Multi-Layer [Bottom Overlay] to [Solder Side] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1834.375mil|Location2.X=1845.625mil|Location1.Y=4476.621mil|Location2.Y=4487.871mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1834.375mil|Location2.X=1845.625mil|Location1.Y=4476.621mil|Location2.Y=4487.871mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,7.874mm)(8.509mm,7.874mm) on Bottom Overlay And Pad HDR3-3(4.572mm,6.604mm) on Multi-Layer [Bottom Overlay] to [Solder Side] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1934.375mil|Location2.X=1945.625mil|Location1.Y=4476.621mil|Location2.Y=4487.871mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1934.375mil|Location2.X=1945.625mil|Location1.Y=4476.621mil|Location2.Y=4487.871mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.14mm &lt; 0.254mm) Between Track (-2.159mm,7.874mm)(8.509mm,7.874mm) on Bottom Overlay And Pad HDR3-4(7.112mm,6.604mm) on Multi-Layer [Bottom Overlay] to [Solder Side] clearance [0.14mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1773.095mil|Location2.X=1786.389mil|Location1.Y=4145.375mil|Location2.Y=4156.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1773.095mil|Location2.X=1786.389mil|Location1.Y=4145.375mil|Location2.Y=4156.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.213mm &lt; 0.254mm) Between Text "HDR1" (3.048mm,-0.838mm) on Top Overlay And Pad HDR1-1(1.143mm,0mm) on Component Side [Top Overlay] to [Top Solder] clearance [0.213mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1773.095mil|Location2.X=1784.345mil|Location1.Y=4053.888mil|Location2.Y=4065.138mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1773.095mil|Location2.X=1784.345mil|Location1.Y=4053.888mil|Location2.Y=4065.138mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.065mm &lt; 0.254mm) Between Text "HDR1" (3.048mm,-0.838mm) on Top Overlay And Pad HDR1-3(1.143mm,-2.54mm) on Component Side [Top Overlay] to [Top Solder] clearance [0.065mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1806.407mil|Location2.X=1814.074mil|Location1.Y=4078.229mil|Location2.Y=4085.895mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1806.407mil|Location2.X=1814.074mil|Location1.Y=4078.229mil|Location2.Y=4085.895mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "HDR1" (3.048mm,-0.838mm) on Top Overlay And Pad HDR1-4(5.588mm,-2.54mm) on Component Side [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1801.934mil|Location2.X=1813.184mil|Location1.Y=4145.375mil|Location2.Y=4156.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1801.934mil|Location2.X=1813.184mil|Location1.Y=4145.375mil|Location2.Y=4156.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.203mm &lt; 0.254mm) Between Text "HDR1" (3.048mm,-0.838mm) on Top Overlay And Pad HDR1-2(5.588mm,0mm) on Component Side [Top Overlay] to [Top Solder] clearance [0.203mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1065.361mil|Location2.X=1076.611mil|Location1.Y=4624.178mil|Location2.Y=4635.428mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1065.361mil|Location2.X=1076.611mil|Location1.Y=4624.178mil|Location2.Y=4635.428mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-14.961mm,11.625mm)(-13.761mm,11.625mm) on Top Overlay And Pad R1_A-2(-14.361mm,10.725mm) on Component Side [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1089.511mil|Location2.X=1097.178mil|Location1.Y=4614.776mil|Location2.Y=4622.443mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1089.511mil|Location2.X=1097.178mil|Location1.Y=4614.776mil|Location2.Y=4622.443mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R1_A" (-15.664mm,11.354mm) on Top Overlay And Pad R1_A-2(-14.361mm,10.725mm) on Component Side [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1065.361mil|Location2.X=1076.611mil|Location1.Y=4639.926mil|Location2.Y=4651.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1065.361mil|Location2.X=1076.611mil|Location1.Y=4639.926mil|Location2.Y=4651.176mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (-14.961mm,11.625mm)(-13.761mm,11.625mm) on Top Overlay And Pad R1_A-1(-14.361mm,12.525mm) on Component Side [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1078.674mil|Location2.X=1086.34mil|Location1.Y=4646.808mil|Location2.Y=4654.475mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1078.674mil|Location2.X=1086.34mil|Location1.Y=4646.808mil|Location2.Y=4654.475mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R1_A" (-15.664mm,11.354mm) on Top Overlay And Pad R1_A-1(-14.361mm,12.525mm) on Component Side [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1149.752mil|Location2.X=1157.418mil|Location1.Y=4665.698mil|Location2.Y=4673.364mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1149.752mil|Location2.X=1157.418mil|Location1.Y=4665.698mil|Location2.Y=4673.364mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "D1" (-13.378mm,11.735mm) on Top Overlay And Pad D1-2(-12.837mm,12.833mm) on Component Side [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1136.965mil|Location2.X=1144.632mil|Location1.Y=4638.56mil|Location2.Y=4646.227mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1136.965mil|Location2.X=1144.632mil|Location1.Y=4638.56mil|Location2.Y=4646.227mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "D1" (-13.378mm,11.735mm) on Top Overlay And Pad D1-1(-12.837mm,11.433mm) on Component Side [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1137.363mil|Location2.X=1145.029mil|Location1.Y=4623.167mil|Location2.Y=4630.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1137.363mil|Location2.X=1145.029mil|Location1.Y=4623.167mil|Location2.Y=4630.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R1_A" (-15.664mm,11.354mm) on Top Overlay And Pad D1-1(-12.837mm,11.433mm) on Component Side [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1530.595mil|Location2.X=1541.845mil|Location1.Y=4018.155mil|Location2.Y=4029.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1530.595mil|Location2.X=1541.845mil|Location1.Y=4018.155mil|Location2.Y=4029.405mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-3.144mm,-4.518mm)(-3.144mm,-4.118mm) on Top Overlay And Pad R2_A-2(-2.794mm,-3.568mm) on Component Side [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1558.155mil|Location2.X=1569.405mil|Location1.Y=4018.155mil|Location2.Y=4029.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1558.155mil|Location2.X=1569.405mil|Location1.Y=4018.155mil|Location2.Y=4029.405mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-2.444mm,-4.518mm)(-2.444mm,-4.118mm) on Top Overlay And Pad R2_A-2(-2.794mm,-3.568mm) on Component Side [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1531.787mil|Location2.X=1539.454mil|Location1.Y=4022.086mil|Location2.Y=4029.753mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1531.787mil|Location2.X=1539.454mil|Location1.Y=4022.086mil|Location2.Y=4029.753mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R2_A" (-4.089mm,-4.597mm) on Top Overlay And Pad R2_A-2(-2.794mm,-3.568mm) on Component Side [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1530.595mil|Location2.X=1541.845mil|Location1.Y=3990.595mil|Location2.Y=4001.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1530.595mil|Location2.X=1541.845mil|Location1.Y=3990.595mil|Location2.Y=4001.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-3.144mm,-4.518mm)(-3.144mm,-4.118mm) on Top Overlay And Pad R2_A-1(-2.794mm,-5.068mm) on Component Side [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1558.155mil|Location2.X=1569.405mil|Location1.Y=3990.595mil|Location2.Y=4001.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1558.155mil|Location2.X=1569.405mil|Location1.Y=3990.595mil|Location2.Y=4001.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Track (-2.444mm,-4.518mm)(-2.444mm,-4.118mm) on Top Overlay And Pad R2_A-1(-2.794mm,-5.068mm) on Component Side [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1545.203mil|Location2.X=1552.87mil|Location1.Y=3986.776mil|Location2.Y=3994.443mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1545.203mil|Location2.X=1552.87mil|Location1.Y=3986.776mil|Location2.Y=3994.443mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R2_A" (-4.089mm,-4.597mm) on Top Overlay And Pad R2_A-1(-2.794mm,-5.068mm) on Component Side [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDERHLAX0PDKQYLSIQVJ0LLCHEYDDAKW3GWU0VKUJSSAK0I5W0DI3G"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1172.265mil|Location2.X=1177.452mil|Location1.Y=4909.374mil|Location2.Y=4914.561mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1172.265mil|Location2.X=1177.452mil|Location1.Y=4909.374mil|Location2.Y=4914.561mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.092mm &lt; 0.1mm) Between Via (-11.659mm,18.44mm) from Component Side to Bottom Layer And Pad VR1-7(-13.46mm,18.669mm) on Bottom Layer [Solder Side] Mask Sliver [0.092mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.407mil|Location2.X=1727.593mil|Location1.Y=4203.907mil|Location2.Y=4209.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.407mil|Location2.X=1727.593mil|Location1.Y=4203.907mil|Location2.Y=4209.093mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.076mm &lt; 0.1mm) Between Via (1.651mm,1.346mm) from Component Side to Bottom Layer And Pad HDR1-1(1.143mm,0mm) on Component Side [Top Solder] Mask Sliver [0.076mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDFCDQOFPE4WCANJO51ANCXIF4DLLYMOW2M3SKREFIJKYIS0AP24WP"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=925.63mil|Location2.X=1034.37mil|Location1.Y=4385.63mil|Location2.Y=4494.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=925.63mil|Location2.X=1034.37mil|Location1.Y=4385.63mil|Location2.Y=4494.37mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -1(-17.272mm,6.604mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1025.63mil|Location2.X=1134.37mil|Location1.Y=4385.63mil|Location2.Y=4494.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1025.63mil|Location2.X=1134.37mil|Location1.Y=4385.63mil|Location2.Y=4494.37mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -2(-14.732mm,6.604mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1125.63mil|Location2.X=1234.37mil|Location1.Y=4385.63mil|Location2.Y=4494.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1125.63mil|Location2.X=1234.37mil|Location1.Y=4385.63mil|Location2.Y=4494.37mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -3(-12.192mm,6.604mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=925.63mil|Location2.X=1034.37mil|Location1.Y=3885.63mil|Location2.Y=3994.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=925.63mil|Location2.X=1034.37mil|Location1.Y=3885.63mil|Location2.Y=3994.37mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -6(-17.272mm,-6.096mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1025.63mil|Location2.X=1134.37mil|Location1.Y=3885.63mil|Location2.Y=3994.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1025.63mil|Location2.X=1134.37mil|Location1.Y=3885.63mil|Location2.Y=3994.37mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -5(-14.732mm,-6.096mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1125.63mil|Location2.X=1234.37mil|Location1.Y=3885.63mil|Location2.Y=3994.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1125.63mil|Location2.X=1234.37mil|Location1.Y=3885.63mil|Location2.Y=3994.37mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -4(-12.192mm,-6.096mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=639.409mil|Location2.X=720.591mil|Location1.Y=4112.007mil|Location2.Y=4193.189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=639.409mil|Location2.X=720.591mil|Location1.Y=4112.007mil|Location2.Y=4193.189mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -OUT(-24.892mm,-0.696mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=639.409mil|Location2.X=720.591mil|Location1.Y=4037.008mil|Location2.Y=4118.189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=639.409mil|Location2.X=720.591mil|Location1.Y=4037.008mil|Location2.Y=4118.189mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -ref(-24.892mm,-2.601mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=755.63mil|Location2.X=864.37mil|Location1.Y=4505.63mil|Location2.Y=4614.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=755.63mil|Location2.X=864.37mil|Location1.Y=4505.63mil|Location2.Y=4614.37mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -2(-21.59mm,9.652mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=639.409mil|Location2.X=720.591mil|Location1.Y=4187.007mil|Location2.Y=4268.189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=639.409mil|Location2.X=720.591mil|Location1.Y=4187.007mil|Location2.Y=4268.189mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -GND(-24.892mm,1.209mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=639.409mil|Location2.X=720.591mil|Location1.Y=4262.007mil|Location2.Y=4343.189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=639.409mil|Location2.X=720.591mil|Location1.Y=4262.007mil|Location2.Y=4343.189mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -+5V(-24.892mm,3.114mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=655.63mil|Location2.X=764.37mil|Location1.Y=4505.63mil|Location2.Y=4614.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Tom\Documents\GitHub\MABSS\hardware\MABSS_currentSensor\MABSS_currentSensor.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=655.63mil|Location2.X=764.37mil|Location1.Y=4505.63mil|Location2.Y=4614.37mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad -1(-24.13mm,9.652mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
